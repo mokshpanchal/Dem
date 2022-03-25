@@ -1,24 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {Fragment} from 'react';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Login from './components/Login';
+import Signup from './components/SignUp';
+import Header from './components/shared/Header';
+import Welcome from './components/Welcome';
+import Footer from './components/shared/Footer';
+import Home from './components/Home';
+import ForgotPasswordEmail from './components/ForgotPasswordEmail';
+import ForgotPassword from './components/ForgotPassword';
 
 function App() {
   return (
+    <>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Fragment>
+          <Header />
+            <Routes>
+              <Route path="/" element={<Welcome />}/>
+              <Route path="/login" element={<Login />}/>
+              <Route path="/signup" element={<Signup />}/>
+              <Route path="/home" element={<Home />}/>
+              <Route path="/forgot_password" element={<ForgotPasswordEmail />}/>
+              <Route path="/forgot_password/:id" element={<ForgotPassword />}/>
+            </Routes>
+          <Footer/>
+        </Fragment>
+      </BrowserRouter>
     </div>
+    </>
   );
 }
 
