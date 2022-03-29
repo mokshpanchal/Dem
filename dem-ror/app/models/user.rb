@@ -10,20 +10,22 @@ class User < ApplicationRecord
   validates_uniqueness_of :email, :phone
   # validates_format_of :phone, with:  /\(?([0-9]{3})\)?[-|\s]?([0-9]{3})[-|\s]?([0-9]{4})/, message: "- Phone number must be in XXX-XXX-XXXX format"
 
-  # has_one_attached :avatar
+  has_one_attached :avatar
+  has_many :contents
+  has_many :content_threads
+  
+  validate :check_file_type ,if: :avatar_attached
 
-  # validate :check_file_type ,if: :avatar_attached
+  def check_file_type
+  	if avatar.content_type.in?(%w(image/gif image/png image/jpg image/jpeg))
+  		return true
+  	else
+  		errors.add(:avatar, "Must be a GIF/JPG/PNG file")
+  	end
+  end
 
-  # def check_file_type
-  # 	if avatar.content_type.in?(%w(image/gif image/png image/jpg image/jpeg))
-  # 		return true
-  # 	else
-  # 		errors.add(:avatar, "Must be a GIF/JPG/PNG file")
-  # 	end
-  # end
-
-  # def avatar_attached
-  # 	avatar.attched?
-  # end
+  def avatar_attached
+  	avatar.attched?
+  end
 
 end
