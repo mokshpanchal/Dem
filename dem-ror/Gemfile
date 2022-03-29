@@ -24,7 +24,8 @@ gem 'rack-cors'
 gem 'actionmailer'
 gem 'mail'
 gem 'net-smtp', require: false
-
+gem 'net-pop', require: false
+gem 'net-imap', require: false
 # env variables
 gem 'dotenv-rails'
 

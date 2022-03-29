@@ -103,4 +103,6 @@ Rails.application.configure do
       password: Rails.application.credentials.gmail[:pass],
       authentication: 'plain',
     }
+
+
 end
