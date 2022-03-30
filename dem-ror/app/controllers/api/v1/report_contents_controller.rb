@@ -1,22 +1,26 @@
-class ReportContentsController < ApplicationController
-  def index
-  end
+module Api
+  module V1
+    class ReportContentsController < ApplicationController
+      def index
+      end
 
-  def create
-  end
+      def create
+      end
 
-  def update
-  end
+      def update
+      end
 
-  def edit
-  end
+      def edit
+      end
 
-  def destroy
-  end
+      def destroy
+      end
 
-  def new
-  end
+      def new
+      end
 
-  def show
+      def show
+      end
+    end
   end
 end
