@@ -123,11 +123,14 @@ function SignUp() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          SignUp
-        </Button>
-
+        <div style={{marginTop: "2%", marginBottom: "2%"}}>
+          <Button block size="lg" type="submit" disabled={!validateForm()}>
+            SignUp
+          </Button>
+        </div>
+        <div>
+          <a href="/login"> Already have an account? </a>
+        </div>
       </Form>
     </div>
   );

@@ -76,9 +76,17 @@ function Login() {
           />
 
         </Form.Group>
-        <Button variant="outline-primary" block size="lg" type="submit" >
-          Login
-        </Button>
+        <div style={{marginTop: "2%", marginBottom: "2%"}}>
+          <Button variant="primary" block size="lg" type="submit" disabled={!validateForm()}>
+            Login
+          </Button>
+        </div>
+        <div>
+          <a href="/forgot_password"> Forgot Password ?</a>
+        </div>
+        <div>
+          <a href="/signup"> Don't have an account ?</a>
+        </div>
       </Form>
 
     </div>

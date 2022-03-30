@@ -13,6 +13,7 @@ import Footer from './components/shared/Footer';
 import Home from './components/Home';
 import ForgotPasswordEmail from './components/ForgotPasswordEmail';
 import ForgotPassword from './components/ForgotPassword';
+import Content from './components/Content';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="/home" element={<Home />}/>
               <Route path="/forgot_password" element={<ForgotPasswordEmail />}/>
               <Route path="/forgot_password/:id" element={<ForgotPassword />}/>
+              <Route path="/content" element={<Content />}/>
             </Routes>
           <Footer/>
         </Fragment>
