@@ -26,6 +26,11 @@ gem 'mail'
 gem 'net-smtp', require: false
 gem 'net-pop', require: false
 gem 'net-imap', require: false
+gem 'money-rails'
+
+gem 'paypal-sdk-rest'
+gem 'mp3info'
+
 # env variables
 gem 'dotenv-rails'
 

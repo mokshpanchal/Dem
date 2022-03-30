@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_002213) do
+ActiveRecord::Schema.define(version: 2022_03_29_074439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,31 @@ ActiveRecord::Schema.define(version: 2022_03_29_002213) do
     t.integer "allow_to_publish"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subscription_plans_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "subscription_plan_id", null: false
+    t.integer "status"
+    t.datetime "expires_on"
+    t.float "space_allowed"
+    t.float "remaining_space"
+    t.integer "renewable"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.float "commission"
+    t.integer "payment_mode"
+    t.integer "status"
+    t.float "sender_closing"
+    t.float "recipient_closing"
+    t.string "recordable_type", null: false
+    t.bigint "recordable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recordable_type", "recordable_id"], name: "index_transactions_on_recordable"
   end
 
   create_table "user_settings", force: :cascade do |t|

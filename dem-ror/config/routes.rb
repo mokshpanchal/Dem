@@ -19,8 +19,8 @@ Rails.application.routes.draw do
       confirmations: 'users/confirmations'
     },
     sign_out_via: [:get, :post]
-    scope :api do
-        scope :v1 do
+    namespace :api do
+        namespace :v1 do
           resources :interests
           resources :cart_items
           resources :subscription_plans
