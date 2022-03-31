@@ -5,7 +5,7 @@ import swal from "sweetalert";
 
 
 async function createContent(creds) {
-    return fetch('http://localhost:3000/api/v1/contents', {
+    return fetch(' https://c621-3-128-192-107.ngrok.io/api/v1/contents', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -25,12 +25,10 @@ function Content() {
     boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)"
   };
 
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [name, setName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [birth_date, setDate] = useState("");
-//   const [username, setUsername] = useState("");
+  const [content_type, setContentType] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
   const [material, setMaterial] = useState("");
 
   function validateForm() {
@@ -40,10 +38,15 @@ function Content() {
   const handleSubmit = async e => {
     e.preventDefault();
     const response = await createContent({"content":{
-        material}
+        material,
+        title,
+        description,
+        price,
+        content_type
+    }
     });
 
-    if (response) {
+    if (response.status === 200 || response.status === 201) {
       console.log(response);
       swal("Success", "Register to DEM successfully!", "success", {
         buttons: false,
@@ -61,6 +64,41 @@ function Content() {
     <div style={container} className="SignUp">
       <img style={{width: 100, margin: "20px"}} src="/assets/logo.png" alt="" />
       <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="title">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="description">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="textarea"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="price">
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            type="float"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="content_type">
+          <Form.Label>ContentType</Form.Label>
+          <Form.Control
+            type="text"
+            value={content_type}
+            onChange={(e) => setContentType(e.target.value)}
+          />
+        </Form.Group>
 
         <Form.Group size="lg" controlId="file">
           <Form.Label>File</Form.Label>

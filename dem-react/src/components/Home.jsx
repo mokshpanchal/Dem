@@ -4,8 +4,13 @@ import Button from "react-bootstrap/Button";
 import swal from 'sweetalert';
 
 function Home() {
+  const mystyle = {
+    backgroundImage: `url('./back.jpg')`,
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat',
+  } 
   return( 
-    <div className="home">
+    <div style={mystyle} className="home">
       
     </div>
   );

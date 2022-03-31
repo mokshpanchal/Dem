@@ -98,7 +98,7 @@ module Api
       end
 
       def content_update_params
-        params.require(:content).permit(:user_id, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug)
+        params.require(:content).permit(:title, :content_type, :description, :duration, :price, :file_size, :slug)
       end
     end
   end
