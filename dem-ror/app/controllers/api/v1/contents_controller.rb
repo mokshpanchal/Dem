@@ -3,7 +3,6 @@ module Api
     class ContentsController < ApplicationController
       include ResourceRenderer
       before_action :accept_all_params
-      before_action :authenticate_user!
       def index
         contents = Content.all
         if contents.present?
@@ -15,7 +14,7 @@ module Api
 
       def create
         content = Content.new(content_params.except(:material))
-        content.user_id = current_user.id
+        content.user_id = 1
         if content.save!
           material = content_params[:material]
           tempfile  = Tempfile.new(content.id.to_s)

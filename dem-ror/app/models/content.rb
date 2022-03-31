@@ -1,7 +1,7 @@
 class Content < ApplicationRecord
   # require 'mp3info'
   belongs_to :user
-  has_many_attached :materials
+  has_one_attached :material
 
   before_save :set_file_size, :set_slug, :set_duration
 
@@ -11,14 +11,14 @@ class Content < ApplicationRecord
   end
 
   def set_slug
-    self.slug = %w(self.title).join("_")
+    self.slug = %W(#{self.title}).join("_")
   end
 
-  def duration
-    if self.content_type == "audio"
+  def set_duration
+    # if self.content_type == "audio"
       # Mp3Info.open(self.file)
-    else
+    # else
       self.duration = "30"
-    end
+    # end
   end
 end
