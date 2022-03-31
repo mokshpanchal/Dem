@@ -1,10 +1,27 @@
 import axios from "axios";
+import { getAuthToken } from "./local-service";
 
 const BASE_API = process.env.REACT_APP_PUBLIC_URL;
 
+export function getHeaders(headers = {}) {
+  const authToken = getAuthToken();
+  headers = {
+    ...headers,
+    "Content-Type": "application/json",
+  };
+  headers = authToken
+    ? {
+        ...headers,
+        Authorization: authToken,
+      }
+    : headers;
+  return headers;
+}
 export async function fetchApi(path = "/", query = "") {
   return await axios
-    .get(`${BASE_API}${path}`)
+    .get(`${BASE_API}${path}`, {
+      headers: getHeaders(),
+    })
     .then((response) => response)
     .catch((error) => {
       console.error(error);
@@ -34,7 +51,10 @@ export async function bulkAsyncFetchApi(pathObjects = []) {
         const resp = await axios.get(
           `${BASE_API}${pathObject.path}${
             pathObject.queryString ? `?${pathObject.queryString}` : ""
-          }`
+          }`,
+          {
+            headers: getHeaders(),
+          }
         );
         return resolve({ [pathObject.responseKey]: resp.data });
       }),

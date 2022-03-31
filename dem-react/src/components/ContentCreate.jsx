@@ -3,31 +3,42 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 import axios from "axios";
+import { getAuthToken } from "../helpers/local-service";
 
 async function createContent(formdata, file) {
-    var formData = new FormData();
-    formData.append("content[title]",formdata["content"]["title"]);
-    formData.append("content[content_type]",formdata["content"]["content_type"]);
-    formData.append("content[description]",formdata["content"]["description"]);
-    formData.append("content[price]",formdata["content"]["price"]);
-    formData.append("content[material]", file);
-    return fetch(' http://localhost:3000/api/v1/contents', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0Iiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjQ4NzMzMzY3LCJleHAiOjE2NTAwMjkzNjcsImp0aSI6IjA2MzkwZWZiLTk2ODktNGY3Zi05NGRlLTRkMzllOTRlNWI1NiJ9.mwI_oss7ZXxCo3oYPIAcXRXhIhcBFSs9GZKwhUxlUcY'
-        // 'Content-Type': 'multipart/form-data',
-        },
-        body: formData  
-    })
-    // return axios({
-    //         url: 'http://localhost:3000/api/v1/contents',
-    //         method: 'POST',
-    //         headers: {
-    //         'Content-Type': 'multipart/form-data boundary=${form._boundary}',
-    //         },
-    //         data: formData  
-    // })
-    //     .then(data => data)
+  // var formData = new FormData();
+  console.log({ file });
+  // formData.append("title", formdata["content"]["title"]);
+  // formData.append("content_type", formdata["content"]["content_type"]);
+  // formData.append("description", formdata["content"]["description"]);
+  // formData.append("price", formdata["content"]["price"]);
+  // formData.append("material", file);
+  const form = {
+    title: formdata["content"]["title"],
+    content_type: formdata["content"]["content_type"],
+    description: formdata["content"]["description"],
+    price: formdata["content"]["price"],
+    material: file,
+  };
+  // console.log({ form });
+  // return fetch(`${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`, {
+  //   method: "POST",
+  //   headers: {
+  //     Authorization: getAuthToken(),
+  //     "Content-Type": "multipart/form-data",
+  //   },
+  //   body: formData,
+  // });
+  console.log({ form, file });
+  return axios({
+    url: `${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`,
+    method: "POST",
+    headers: {
+      Authorization: getAuthToken(),
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify(form),
+  }).then((data) => data);
 }
 
 function ContentCreate() {
@@ -37,48 +48,68 @@ function ContentCreate() {
     padding: "30px 20px",
     borderRadius: "10px",
     border: 0,
-    boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)"
+    boxShadow:
+      "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
   };
-    const params = new URLSearchParams(window.location.search);
-    const content_type = params.get('content_type'); // bar
+  const params = new URLSearchParams(window.location.search);
+  const content_type = params.get("content_type"); // bar
 
-//   const [content_type, setContentType] = useState("");
+  //   const [content_type, setContentType] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [material, setMaterial] = useState("");
+  const [material, setMaterial] = useState();
+  const [binaryFile, setBinaryFile] = useState();
 
   function validateForm() {
-    return true
+    return true;
   }
-
-  const handleSubmit = async e => {
+  const getBase64 = async (file) => {
+    var reader = new FileReader();
+    await reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+  };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await createContent({"content":{
+    const fileBinary = await getBase64(material);
+    await setBinaryFile(fileBinary);
+    // if (fileBinary) {
+    const response = await createContent({
+      content: {
         title,
         description,
         price,
-        content_type
-    }
-    }, material);
+        content_type,
+      },
+      fileBinary,
+    });
 
     if (response.status === 200 || response.status === 201) {
       console.log(response);
       swal("Success", "Register to DEM successfully!", "success", {
         buttons: false,
         timer: 2000,
-      })
-      .then((value) => {
+      }).then((value) => {
         window.location.href = "/login";
       });
     } else {
       swal("Failed", "Please try again", "error");
     }
-  }
-
+    // }
+  };
+  console.log({ material }, material?.name);
   return (
     <div style={container} className="ContentCreate">
-      <img style={{width: 100, margin: "20px"}} src="/assets/logo.png" alt="" />
+      <img
+        style={{ width: 100, margin: "20px" }}
+        src="/assets/logo.png"
+        alt=""
+      />
       <h2> Upload your content</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="title">
@@ -123,14 +154,16 @@ function ContentCreate() {
           <Form.Control
             autoFocus
             type="file"
-            value={material}
-            onChange={(e) => setMaterial(e.target.value)}
+            onChange={(e) => {
+              console.log(e);
+              setMaterial(e.target.files[0]);
+            }}
           />
         </Form.Group>
-        <div style={{marginTop: "2%", marginBottom: "2%"}}>
-            <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <div style={{ marginTop: "2%", marginBottom: "2%" }}>
+          <Button block size="lg" type="submit" disabled={!validateForm()}>
             Upload
-            </Button>
+          </Button>
         </div>
       </Form>
     </div>
