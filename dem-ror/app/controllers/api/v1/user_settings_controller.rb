@@ -1,25 +1,13 @@
 module Api
   module V1
     class UserSettingsController < ApplicationController
+      before_action :authenticate_user!
       def index
-      end
-
-      def create
+        settings = UserSetting.where(user_id: current_user.id).first
+        render_success_response(setting, "User settings", 200)
       end
 
       def update
-      end
-
-      def edit
-      end
-
-      def destroy
-      end
-
-      def new
-      end
-
-      def show
       end
     end
   end

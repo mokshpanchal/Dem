@@ -13,7 +13,13 @@ import Footer from './components/shared/Footer';
 import Home from './components/Home';
 import ForgotPasswordEmail from './components/ForgotPasswordEmail';
 import ForgotPassword from './components/ForgotPassword';
-import Content from './components/Content';
+import ContentCreate from './components/ContentCreate';
+import Settings from './components/Settings';
+import Search  from './components/Search';
+import UserProfile  from './components/UserProfile';
+import Cart from './components/Cart';
+import ContentList from './components/ContentList';
+import Plan from './components/Plan';
 
 function App() {
   return (
@@ -29,7 +35,14 @@ function App() {
               <Route path="/home" element={<Home />}/>
               <Route path="/forgot_password" element={<ForgotPasswordEmail />}/>
               <Route path="/forgot_password/:id" element={<ForgotPassword />}/>
-              <Route path="/content" element={<Content />}/>
+              {/* <Route path="/content" element={<Content />}/> */}
+              <Route path="/content/create" element={<ContentCreate />}/>
+              <Route path="/setting" element={<Settings />}/>
+              <Route path="/profile" element={<UserProfile />}/>
+              <Route path="/cart" element={<Cart />}/>
+              <Route path="/search" element={<Search />}/>
+              <Route path="/plans" element={<Plan />}/>
+              <Route path="/content-list" element={<ContentList />}/>
             </Routes>
           <Footer/>
         </Fragment>

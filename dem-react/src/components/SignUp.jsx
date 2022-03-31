@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 
-
 async function signupUser(creds) {
     return fetch('http://localhost:3000/users/register', {
         method: 'POST',

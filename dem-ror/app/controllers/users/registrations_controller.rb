@@ -30,7 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   respond_with resource
     # end
     super
-    UserMailer.with(user: resource).welcome_email.deliver_now
+    UserMailer.with(user: resource).welcome_email.deliver_now if resource.persisted?
   end
 
   # GET /resource/edit

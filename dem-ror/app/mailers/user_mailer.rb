@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
 	def welcome_email
 		@user = params[:user]
-		@url  = 'http://localhost:4000/dashboard'
+		@url  = 'http://https://3.128.192.107/:4000/login'
 		return false unless @user
 		mail(to: @user.email, subject: "Welcome to Dem #{@user.name.capitalize} !")
 	end
@@ -12,13 +12,13 @@ class UserMailer < ApplicationMailer
 		@user = User.find_by_email(params[:email])
 		return false unless @user
 		create_reset_password_token(@user)
-		@url  = "http://localhost:4000/forgot_password/#{@user.id}?token=#{@user.reset_password_token}"
+		@url  = "http://https://3.128.192.107/:4000/forgot_password/#{@user.id}?token=#{@user.reset_password_token}"
 		mail(to: @user.email, subject: "Reset your password")
 	end
 
 	def password_has_been_updated
 		@user = params[:user]
-		@url  = 'http://localhost:4000/login'
+		@url  = 'http://https://3.128.192.107/:4000/login'
 		return false unless @user
 		mail(to: @user.email, subject: "Your password has been updated")
 	end

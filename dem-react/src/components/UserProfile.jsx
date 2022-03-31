@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Welcome() {
+export default function UserProfile() {
     const mystyle = {
         backgroundImage: `url('./back.jpg')`,
         backgroundSize: '100% 100%',
@@ -9,7 +9,7 @@ export default function Welcome() {
     }
   return (
     <>
-    <div style={mystyle} className="Welcome">
+    <div style={mystyle} className="UserProfile">
     </div>
     </>
   )

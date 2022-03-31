@@ -44,8 +44,17 @@ const Footer = () => {
   return (
     <>
     <div style={footer} className="Footer">
-        <img style={footerLogo}src="/assets/logo-whiteBG-round.png" alt="" />
+        <a href="http://3.128.192.107:4000/home"><img style={footerLogo}src="/assets/logo-whiteBG-round.png" alt="" /></a>
         <div style={footerList}>
+            <div>
+                <ul>
+                    <li style={bold}>Social Links</li>
+                    <li><a href="https://www.linkedin.com/in/dem-web-app-3a9355236/" target="_blank"><img style={{ width: "5vh", height: "5vh" }} src="/assets/linkedin.png" /></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100079862656661" target="_blank"><img style={{ width: "5vh", height: "5vh" }} src="/assets/facebook.png" /></a></li>
+                    <li><a href="https://twitter.com/DemWebApp" target="_blank"><img style={{ width: "5vh", height: "5vh" }} src="/assets/twitter.png" /></a></li>
+                    <li><a href="https://github.com/DemWebApp" target="_blank"><img style={{ width: "5vh", height: "5vh" }} src="/assets/github.png" /></a></li>
+                </ul>
+            </div>
             <div style={list1}>
                 <ul>
                     <li style={bold}>Dēm Services</li>
@@ -64,7 +73,7 @@ const Footer = () => {
             </div>
         </div>
         <hr style={line}/>
-        <p style = {lowerFooter}>&copy; 2022 Dēm.com </p>
+        <p style = {lowerFooter}>&copy; 2022 <a style={{color: 'white', textDecoration: 'none'}} href="http://3.128.192.107:4000/home">Dēm.com;</a> All the rights are reserved.</p>
     </div>
     </>
   )

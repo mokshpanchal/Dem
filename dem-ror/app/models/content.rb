@@ -4,7 +4,7 @@ class Content < ApplicationRecord
   has_one_attached :material
 
   before_save :set_file_size, :set_slug, :set_duration
-
+  
   def set_file_size
     # self.file_size = ((File.open(self.file).size/1024).to_f/1024).round(2)
     self.file_size = 30
@@ -20,5 +20,9 @@ class Content < ApplicationRecord
     # else
       self.duration = "30"
     # end
+  end
+
+  def set_default_settings
+    
   end
 end

@@ -13,8 +13,9 @@ module Api
       end
 
       def create
+        byebug
         content = Content.new(content_params.except(:material))
-        content.user_id = 1
+        content.user_id = current_user.id
         if content.save!
           material = content_params[:material]
           tempfile  = Tempfile.new(content.id.to_s)
