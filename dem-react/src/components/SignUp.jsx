@@ -3,16 +3,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 
-
 async function signupUser(creds) {
-    return fetch('http://localhost:3000/users/register', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(creds)
-    })
-        .then(data => data)
+  return fetch(`${process.env.REACT_APP_PUBLIC_URL}/users/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(creds),
+  }).then((data) => data);
 }
 
 function SignUp() {
@@ -22,7 +20,8 @@ function SignUp() {
     padding: "30px 20px",
     borderRadius: "10px",
     border: 0,
-    boxShadow: "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)"
+    boxShadow:
+      "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
   };
 
   const [email, setEmail] = useState("");
@@ -36,15 +35,17 @@ function SignUp() {
     return email.length > 0 && password.length > 0;
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await signupUser({"user":{
-      email,
-      password,
-      name,
-      phone,
-      birth_date,
-      username}
+    const response = await signupUser({
+      user: {
+        email,
+        password,
+        name,
+        phone,
+        birth_date,
+        username,
+      },
     });
 
     if (response) {
@@ -52,8 +53,7 @@ function SignUp() {
       swal("Success", "Register to DEM successfully!", "success", {
         buttons: false,
         timer: 2000,
-      })
-      .then((value) => {
+      }).then((value) => {
         // localStorage.setItem('accessToken', response['accessToken']);
         // localStorage.setItem('user', JSON.stringify(response['user']));
         window.location.href = "/login";
@@ -61,11 +61,15 @@ function SignUp() {
     } else {
       swal("Failed", "Please try again", "error");
     }
-  }
+  };
 
   return (
     <div style={container} className="SignUp">
-      <img style={{width: 100, margin: "20px"}} src="/assets/logo.png" alt="" />
+      <img
+        style={{ width: 100, margin: "20px" }}
+        src="/assets/logo.png"
+        alt=""
+      />
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -94,7 +98,7 @@ function SignUp() {
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
-      
+
         <Form.Group size="lg" controlId="phone">
           <Form.Label>Phone</Form.Label>
           <Form.Control
@@ -123,7 +127,7 @@ function SignUp() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Form.Group>
-        <div style={{marginTop: "2%", marginBottom: "2%"}}>
+        <div style={{ marginTop: "2%", marginBottom: "2%" }}>
           <Button block size="lg" type="submit" disabled={!validateForm()}>
             SignUp
           </Button>

@@ -3,7 +3,6 @@ module Api
     class ContentsController < ApplicationController
       include ResourceRenderer
       before_action :accept_all_params
-      before_action :authenticate_user!
       def index
         contents = Content.all
         if contents.present?
@@ -17,14 +16,6 @@ module Api
         content = Content.new(content_params.except(:material))
         content.user_id = current_user.id
         if content.save!
-          material = content_params[:material]
-          tempfile  = Tempfile.new(content.id.to_s)
-          tempfile.binmode
-          tempfile.write(Base64.decode64(material))
-          file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => content.title)
-          content.material = file
-          content.save!
-          content.update(link: Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true))
           render_success_response(content, "Content created successfully", 200)
         else
           render_unprocessable_entity("Something went wrong", 422)
@@ -40,19 +31,24 @@ module Api
         end
       end
 
+      def upload_file
+        content = Content.find(params[:content_id])
+        material = params[:material]
+        tempfile  = Tempfile.new(content.id.to_s)
+        tempfile.binmode
+        tempfile.write(Base64.decode64(material))
+        content.material = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => content.title)
+        content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
+        if content.save!
+          render_success_response(content, "File uploaded successfully", 200)
+        else
+          render_unprocessable_entity("Something went wrong", 422)
+        end
+      end
+
       def update
         content = Content.where(id: params[:id]).first
         if content.update(content_update_params)
-          if content_params[:material].present?
-            material = content_params[:material]
-            tempfile  = Tempfile.new(content.id.to_s)
-            tempfile.binmode
-            tempfile.write(Base64.decode64(material))
-            file = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => content.title)
-            content.material = file
-            content.save!
-            content.update(link: Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true))
-          end
           render_success_response(single_serializer(content, ContentSerializer, current_user: current_user),"Content updated successfully", 200)
         else
           render_unprocessable_entity("Something went wrong", 422)
@@ -99,7 +95,7 @@ module Api
       end
 
       def content_update_params
-        params.require(:content).permit(:user_id, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug)
+        params.require(:content).permit(:title, :content_type, :description, :duration, :price, :file_size, :slug)
       end
     end
   end

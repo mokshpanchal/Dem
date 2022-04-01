@@ -1,0 +1,90 @@
+.container {
+  width: 60%;
+  margin: 10px auto 25px auto;
+  padding: 30px 20px;
+  border-radius: 10px;
+  border: 0;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.upload_card {
+  height: 70px;
+  display: flex;
+  border: 1px solid #156299;
+  border-radius: 5px;
+  width: 60%;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+.upload_card h4 {
+  text-align: left;
+  padding-left: 5px;
+}
+.upload_card_btn button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+.fileUploadBtn {
+  height: 0px;
+  overflow: hidden;
+}
+.list_card {
+  width: 100%;
+  display: block;
+  margin: 25px;
+  border: #156299;
+  border: 1px solid #156299;
+  height: 270px;
+  border-radius: 5px;
+  justify-content: center;
+  padding: 10px 15px 15px 15px;
+}
+.list_card > h4 {
+  color: #156299;
+  opacity: 0.9;
+}
+.content_card {
+  display: flex;
+  justify-content: space-evenly;
+}
+.single_card {
+  border: 1px solid #156299;
+  height: 180px;
+  width: 200px;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+}
+.first_card {
+  height: 250px;
+  width: 160px;
+  display: inline;
+}
+.first_card > img {
+  border: 1px solid #156299;
+}
+.second_card {
+  text-align: left;
+  font-size: small;
+  line-height: 15px;
+  display: flex;
+  flex-direction: column;
+  color: #156299;
+}
+
+.settings_card {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+.single_settings {
+  display: flex;
+  justify-content: space-between;
+}

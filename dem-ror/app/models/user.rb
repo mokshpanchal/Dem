@@ -13,8 +13,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_many :contents
   has_many :content_threads
+  has_and_belongs_to_many :subscription_plans
   
   validate :check_file_type ,if: :avatar_attached
+  
+  # after_create :set_default_settings, :active_free_plan
 
   def check_file_type
   	if avatar.content_type.in?(%w(image/gif image/png image/jpg image/jpeg))
@@ -27,5 +30,13 @@ class User < ApplicationRecord
   def avatar_attached
   	avatar.attched?
   end
+
+  # def set_default_settings
+  #   UserSetting.new(user_id: current_user.id, discoverability: true,  notifications: true, email_promotion: true, publishable: true)
+  # end
+
+  # def active_free_plan
+
+  # end
 
 end

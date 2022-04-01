@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 	before_action :configure_params, if: :devise_controller?
-
+	
 	protected
 	
 	def configure_params

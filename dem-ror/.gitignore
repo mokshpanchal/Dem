@@ -24,4 +24,5 @@
 /config/master.key
 /config/.env
 /config/credentials.yml.enc
+/storage
 
