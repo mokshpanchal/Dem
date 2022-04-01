@@ -3,22 +3,28 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 import axios from "axios";
-import { getAuthToken } from "../helpers/local-service";
+import { getHeaders } from "../helpers/fetcher";
 
-async function createContent(formdata, file) {
-  // var formData = new FormData();
+async function uploadFile(cId, file) {
   console.log({ file });
-  // formData.append("title", formdata["content"]["title"]);
-  // formData.append("content_type", formdata["content"]["content_type"]);
-  // formData.append("description", formdata["content"]["description"]);
-  // formData.append("price", formdata["content"]["price"]);
-  // formData.append("material", file);
+  let fd = new FormData();
+  fd.append("material", file);
+  // const headers = { "Content-Type": "multipart/form-data" };
+
+  const fileResponse = await axios.post(
+    `${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents/uploadfile?content_id=${cId}`,
+    fd
+  );
+  console.log({ fileResponse });
+  return true;
+}
+async function createContent(formdata, file) {
+  console.log("file outer", { file });
   const form = {
     title: formdata["content"]["title"],
     content_type: formdata["content"]["content_type"],
     description: formdata["content"]["description"],
-    price: formdata["content"]["price"],
-    material: file,
+    price: parseFloat(formdata["content"]["price"]),
   };
   // console.log({ form });
   // return fetch(`${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`, {
@@ -29,16 +35,17 @@ async function createContent(formdata, file) {
   //   },
   //   body: formData,
   // });
-  console.log({ form, file });
-  return axios({
-    url: `${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`,
-    method: "POST",
-    headers: {
-      Authorization: getAuthToken(),
-      "Content-Type": "application/json",
-    },
-    data: JSON.stringify(form),
-  }).then((data) => data);
+  return axios
+    .post(`${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`, form, {
+      headers: getHeaders(),
+    })
+    .then(async (data) => {
+      console.log("content created", { data });
+      console.log("file inner", { file });
+
+      await uploadFile(data.data.data.id, file);
+      debugger;
+    });
 }
 
 function ContentCreate() {
@@ -64,30 +71,20 @@ function ContentCreate() {
   function validateForm() {
     return true;
   }
-  const getBase64 = async (file) => {
-    var reader = new FileReader();
-    await reader.readAsDataURL(file);
-    reader.onload = function () {
-      console.log(reader.result);
-    };
-    reader.onerror = function (error) {
-      console.log("Error: ", error);
-    };
-  };
+  console.log({ material });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const fileBinary = await getBase64(material);
-    await setBinaryFile(fileBinary);
-    // if (fileBinary) {
-    const response = await createContent({
-      content: {
-        title,
-        description,
-        price,
-        content_type,
+    const response = await createContent(
+      {
+        content: {
+          title,
+          description,
+          price,
+          content_type,
+        },
       },
-      fileBinary,
-    });
+      material
+    );
 
     if (response.status === 200 || response.status === 201) {
       console.log(response);
@@ -100,9 +97,7 @@ function ContentCreate() {
     } else {
       swal("Failed", "Please try again", "error");
     }
-    // }
   };
-  console.log({ material }, material?.name);
   return (
     <div style={container} className="ContentCreate">
       <img

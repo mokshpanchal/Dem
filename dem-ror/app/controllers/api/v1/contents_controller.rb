@@ -7,7 +7,7 @@ module Api
         contents = Content.all
         if contents.present?
           render_success_response(array_serializer.new(contents.reverse, serializer: ContentSerializer, current_user: current_user), 200)
-        elsif contents
+        else
           render_unprocessable_entity("Something went wrong", 422)
         end
       end
@@ -34,12 +34,20 @@ module Api
       def upload_file
         content = Content.find(params[:content_id])
         material = params[:material]
-        tempfile  = Tempfile.new(content.id.to_s)
-        tempfile.binmode
-        tempfile.write(Base64.decode64(material))
-        content.material = ActionDispatch::Http::UploadedFile.new(:tempfile => tempfile, :filename => content.title)
-        content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
+        # tempfile  = Tempfile.new(content.id.to_s)
+        # tempfile.binmode
+        # tempfile.write(Base64.decode64(material))
+        content.material = material
+        # content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
         if content.save!
+
+          blob = content.material.blob
+          route = Rails.root.join('public', content.title)
+
+          File.open(route, "wb+") do |file| 
+            blob.download { |chunk| file.write(chunk) }
+          end
+          content.link = route
           render_success_response(content, "File uploaded successfully", 200)
         else
           render_unprocessable_entity("Something went wrong", 422)
