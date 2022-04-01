@@ -1,5 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
-
+/* eslint-disable */
 const Footer = () => {
   const footer = {
     backgroundColor: "#156299",
