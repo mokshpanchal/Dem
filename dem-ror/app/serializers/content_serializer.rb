@@ -1,7 +1,7 @@
 class ContentSerializer < ActiveModel::Serializer
-  attributes  :created_at, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug
+  attributes  :id, :created_at, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug
   has_one :user, serializer: UserSerializer
-
+  
   def created_at
   	diff = (Date.today - object.created_at.to_date).to_i
   	if (diff<=30)

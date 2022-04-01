@@ -2,7 +2,7 @@ class Content < ApplicationRecord
   # require 'mp3info'
   belongs_to :user
   has_one_attached :material
-
+  has_many :cart_items, as: :recordable
   before_save :set_file_size, :set_slug, :set_duration
   
   def set_file_size
@@ -23,6 +23,6 @@ class Content < ApplicationRecord
   end
 
   def set_default_settings
-    
+
   end
 end
