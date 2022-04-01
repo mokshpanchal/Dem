@@ -45,7 +45,7 @@ async function createContent(formdata, file) {
       console.log("file inner", { file });
 
       await uploadFile(data.data.data.id, file);
-      debugger;
+      return data;
     });
 }
 

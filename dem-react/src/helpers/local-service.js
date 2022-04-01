@@ -17,3 +17,11 @@ export function getAuthToken() {
 export function setAuthToken(value) {
   return setValue("auth_token", value);
 }
+export function getLocalCart() {
+  const cart = getValue("cart");
+  return cart ? JSON.parse(cart) : {};
+}
+export function setLocalCart(value) {
+  const cart = JSON.stringify(value);
+  return setValue("cart", cart);
+}
