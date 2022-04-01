@@ -1,4 +1,4 @@
-import { hover } from "@testing-library/user-event/dist/hover";
+/* eslint-disable */
 import { Outlet, Link } from "react-router-dom";
 
 function Header() {
@@ -17,7 +17,8 @@ function Header() {
   };
 
   const navBar = {
-    boxShadow: "5px 5px 10px rgba(0, 0, 0, 0.5)",
+    boxShadow:
+      "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
     display: "flex",
     justifyContent: "space-between",
     padding: "5px 20px",
@@ -50,6 +51,11 @@ function Header() {
     marginLeft: "-15vw",
   };
 
+  const size =
+  {
+     width: "2vw",
+     height: "2vw",
+  }
   return (
     <>
       <div className="Header">
@@ -57,7 +63,7 @@ function Header() {
           <a href="/home">
             <img style={logo} src="/assets/logo.png"></img>
           </a>
-          <ui style={navListLeft}>
+          <ul style={navListLeft}>
             <li style={list}>
               {" "}
               <Link
@@ -78,7 +84,7 @@ function Header() {
                 Plans{" "}
               </Link>{" "}
             </li>
-          </ui>
+          </ul>
           <div style={search}>
             {" "}
             <form>
@@ -86,7 +92,8 @@ function Header() {
                 style={{
                   border: 0,
                   borderRadius: 20,
-                  boxShadow: "3px 3px 10px rgba(0, 0, 0, 0.5)",
+                  boxShadow:
+      "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
                 }}
                 type="text"
                 name="search"
@@ -94,7 +101,7 @@ function Header() {
               <Link to="/search">
                 {" "}
                 <img
-                  style={{ width: "5vh", height: "5vh", marginLeft: 3 }}
+                  style={{ width: "2vw", height: "2vw", marginLeft: 3 }}
                   src="/assets/search.png"
                   alt="image"
                 />{" "}
@@ -109,7 +116,7 @@ function Header() {
               <Link to="/profile">
                 {" "}
                 <img
-                  style={{ width: "5vh", height: "5vh" }}
+                  style={size}
                   src="/assets/user.png"
                   alt="image"
                 />{" "}
@@ -120,7 +127,7 @@ function Header() {
               <Link to="/setting">
                 {" "}
                 <img
-                  style={{ width: "5vh", height: "5vh" }}
+                  style={size}
                   src="/assets/setting.png"
                   alt="image"
                 />{" "}
@@ -131,7 +138,7 @@ function Header() {
               <Link to="/cart">
                 {" "}
                 <img
-                  style={{ width: "5vh", height: "5vh" }}
+                  style={size}
                   src="/assets/shopping-cart.png"
                   alt="image"
                 />{" "}

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import "../styles/Home.css";
 import Toggle from "./ui/Toggle/Toggle";

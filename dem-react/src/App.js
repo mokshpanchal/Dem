@@ -1,3 +1,4 @@
+/* eslint-disable */
 import "./App.css";
 import React, { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -17,6 +18,7 @@ import Cart from "./components/Cart";
 import ContentList from "./components/ContentList";
 import Plan from "./components/Plan";
 import { getAuthToken, getValue } from "./helpers/local-service";
+import PayPal from './components/PayPal';
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -80,6 +82,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/plans" element={<Plan />} />
               <Route path="/content-list" element={<ContentList />} />
+              <Route path="/checkout" element={<PayPal />} />
               <Route
                 path="/dashboard"
                 element={
