@@ -31,6 +31,7 @@ Rails.application.routes.draw do
           resources :content_threads
           resources :notifications
           resources :user_settings
+          post 'contents/uploadfile' => 'contents#upload_file'
         end
     end
 end
