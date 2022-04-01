@@ -25,4 +25,5 @@
 /config/.env
 /config/credentials.yml.enc
 /storage
+/public
 
