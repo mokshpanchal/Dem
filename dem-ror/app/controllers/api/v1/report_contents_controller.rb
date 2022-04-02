@@ -1,6 +1,7 @@
 module Api
   module V1
     class ReportContentsController < ApplicationController
+      include ResourceRenderer
       # def index
       # end
 

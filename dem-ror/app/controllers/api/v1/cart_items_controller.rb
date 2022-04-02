@@ -1,6 +1,7 @@
 module Api
   module V1
     class CartItemsController < ApplicationController
+      include ResourceRenderer
       def index
         items = CartItem.where(user_id: current_user.id)
         if items.present?
