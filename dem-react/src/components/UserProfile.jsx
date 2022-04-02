@@ -50,20 +50,20 @@ export default function UserProfile() {
   console.log({ user });
   return (
     <>
-      <div className="UserProfile">
+      {/* <div className="UserProfile"> */}
         <div className="userDetails">
           <img
             src="/avatar-default.webp"
             height={200}
             width={200}
-            style={{ borderRadius: "100px" }}
+            style={{ borderRadius: "20vh",  }}
           />
-          <a href="#" onClick={logout}>
+          <a className="logout" href="#" onClick={logout}>
             Logout
           </a>
         </div>
-        <div className="userHistory"></div>
-      </div>
+        {/* <div className="userHistory"></div> */}
+      {/* </div> */}
     </>
   );
 }
