@@ -15,8 +15,8 @@ function Header() {
   }, []);
   const logo = {
     float: "left",
-    width: 100,
-    height: 45,
+    width: "7vw",
+    height: "7vh",
     marginTop: "1vh",
   };
 
@@ -25,11 +25,14 @@ function Header() {
     marginTop: "2vh",
     display: "flex",
     justifyContent: "space-around",
+    position: "absolute",
+    marginLeft: "40vw"
   };
 
   const navBar = {
-    boxShadow:
-      "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+    // boxShadow:
+    //   "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+    boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.5)",
     display: "flex",
     justifyContent: "space-between",
     padding: "5px 20px",
@@ -49,6 +52,7 @@ function Header() {
     fontColor: "#156299",
     fontSize: "1.5em",
     textDecoration: "none",
+    marginRight: "1vw"
   };
 
   const navListLeft = {
@@ -57,8 +61,9 @@ function Header() {
     justifyContent: "space-around",
     padding: 0,
     marginTop: "1.5vh",
-    marginLeft: "-15vw",
+    marginLeft: "-55vw",
   };
+
   const cartIndicator = {
     fontSize: "15px",
     background: "#156299",

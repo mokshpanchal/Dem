@@ -2,7 +2,7 @@
 const Footer = () => {
   const footer = {
     backgroundColor: "#156299",
-    height: 300,
+    height: 230,
     position: "relative",
     bottom: 0,
     width: "100%",
@@ -20,7 +20,7 @@ const Footer = () => {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-end",
-    margin: "35px 130px",
+    margin: "5vw 130px",
   };
   const list1 = {};
   const list2 = {};
@@ -42,17 +42,17 @@ const Footer = () => {
         <a href="/home">
           <img style={footerLogo} src="/assets/logo-whiteBG-round.png" alt="" />
         </a>
-        <div style={footerList}>
+        <div >
           <div>
-            <ul>
-              <li style={bold}>Social Links</li>
+            <ul style={footerList}>
+              {/* <li style={bold}>Social Links</li> */}
               <li>
                 <a
                   href="https://www.linkedin.com/in/dem-web-app-3a9355236/"
                   target="_blank"
                 >
                   <img
-                    style={{ width: "5vh", height: "5vh" }}
+                    style={{ width: "2vw", height: "2vw", marginRight: "1vw" }}
                     src="/assets/linkedin.png"
                   />
                 </a>
@@ -63,7 +63,7 @@ const Footer = () => {
                   target="_blank"
                 >
                   <img
-                    style={{ width: "5vh", height: "5vh" }}
+                    style={{ width: "2vw", height: "2vw", marginRight: "1vw" }}
                     src="/assets/facebook.png"
                   />
                 </a>
@@ -71,7 +71,7 @@ const Footer = () => {
               <li>
                 <a href="https://twitter.com/DemWebApp" target="_blank">
                   <img
-                    style={{ width: "5vh", height: "5vh" }}
+                    style={{ width: "2vw", height: "2vw", marginRight: "1vw" }}
                     src="/assets/twitter.png"
                   />
                 </a>
@@ -79,14 +79,14 @@ const Footer = () => {
               <li>
                 <a href="https://github.com/DemWebApp" target="_blank">
                   <img
-                    style={{ width: "5vh", height: "5vh" }}
+                    style={{ width: "2vw", height: "2vw", marginRight: "1vw" }}
                     src="/assets/github.png"
                   />
                 </a>
               </li>
             </ul>
           </div>
-          <div style={list1}>
+          {/* <div style={list1}>
             <ul>
               <li style={bold}>Dēm Services</li>
               <li>Service 1</li>
@@ -101,7 +101,7 @@ const Footer = () => {
               <li>About 2</li>
               <li>About 3</li>
             </ul>
-          </div>
+          </div> */}
         </div>
         <hr style={line} />
         <p style={lowerFooter}>
