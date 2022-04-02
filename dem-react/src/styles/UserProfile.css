@@ -33,12 +33,18 @@
 .logout{
     display: block;
     width: 20vw;
-    height: 7vh;
+    height: 3vw;
     background: #156299;
-    padding: 1vh;
+    padding: 0.1vw;
     text-align: center;
-    border-radius: 1vw;
+    border-radius: 2vw;
     color: white;
     font-weight: bold;
     line-height: 5vh;
+    font-size: 1.25em;
+}
+
+a:hover{
+  text-decoration: none;
+  color: white;
 }

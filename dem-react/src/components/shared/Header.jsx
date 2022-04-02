@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
 import { ThemeContext } from "../../App";
 import { getLocalCart } from "../../helpers/local-service";
+import './Header.css';
 
 function Header() {
   const { cart, setCart } = useContext(ThemeContext);
@@ -89,7 +90,7 @@ function Header() {
           <ul style={navListLeft}>
             <li style={list}>
               {" "}
-              <Link
+              <Link className="links"
                 style={{ color: "#156299", textDecoration: "none" }}
                 to="/content-list"
               >
@@ -99,7 +100,7 @@ function Header() {
             </li>
             <li style={list}>
               {" "}
-              <Link
+              <Link className="links"
                 style={{ color: "#156299", textDecoration: "none" }}
                 to="/plan"
               >

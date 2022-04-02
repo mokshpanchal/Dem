@@ -14,14 +14,16 @@
   flex-direction: column;
 }
 .upload_card {
-  height: 70px;
+  height: 3vw;
   display: flex;
-  border: 1px solid #156299;
-  border-radius: 5px;
-  width: 60%;
+  /* border: 1px solid #156299; */
+  border-radius: 3vw;
+  width: 70%;
   align-items: center;
   justify-content: space-between;
-  padding-top: 15px;
+  padding: 1vw 2vw;
+  height: 20%;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),  0 6.7px 5.3px rgba(0, 0, 0, 0.048),  0 12.5px 10px rgba(0, 0, 0, 0.06),  0 22.3px 17.9px rgba(0, 0, 0, 0.072),  0 41.8px 33.4px rgba(0, 0, 0, 0.086),  0 100px 80px rgba(0, 0, 0, 0.12)
 }
 .upload_card h4 {
   text-align: left;
@@ -87,4 +89,9 @@
 .single_settings {
   display: flex;
   justify-content: space-between;
+}
+
+.home_head{
+  color: #156299;
+  font-weight: bold;
 }

@@ -34,12 +34,12 @@ function Home() {
   return (
     <div className={`Upload container`}>
       <div className="upload_card">
-        <h4>Upload Your Content Now!</h4>
+        <h4 className="home_head">Upload your content here :</h4>
         <div className="upload_card_btn">
           <Link to="/content/create?content_type=audio">
             {" "}
             <img
-              style={{ width: "6vh", height: "6vh", margin: 7 }}
+              style={{ width: "6vh", height: "6vh", margin: "1vw" }}
               src="/assets/audio.png"
               alt="image"
             />{" "}
@@ -47,7 +47,7 @@ function Home() {
           <Link to="/content/create?content_type=video">
             {" "}
             <img
-              style={{ width: "6vh", height: "6vh", margin: 7 }}
+              style={{ width: "6vh", height: "6vh", margin: "1vw" }}
               src="/assets/video.png"
               alt="image"
             />{" "}
