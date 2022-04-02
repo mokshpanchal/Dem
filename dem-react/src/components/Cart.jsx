@@ -91,7 +91,7 @@ export default function Cart() {
         {userCart && Object.entries(userCart).length > 0 && (
           <div className="totalPart">
             <h4>
-              Total:{" "}
+              Total: CAD $
               {userCart.reduce(
                 (total, lineItem) =>
                   (total += parseFloat(lineItem.recordable.price)),

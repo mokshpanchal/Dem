@@ -93,7 +93,14 @@ function App() {
                   }
                 />
                 <Route path="/setting" element={<Settings />} />
-                <Route path="/profile" element={<UserProfile />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <UserProfile />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/plans" element={<Plan />} />

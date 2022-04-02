@@ -45,8 +45,6 @@ function Header() {
   };
 
   const list = {
-    marginLeft: "1.5vh",
-    marginRight: "1.5vh",
     fontWeight: "bold",
     fontColor: "#156299",
     fontSize: "1.5em",
@@ -60,6 +58,15 @@ function Header() {
     padding: 0,
     marginTop: "1.5vh",
     marginLeft: "-15vw",
+  };
+  const cartIndicator = {
+    fontSize: "15px",
+    background: "#156299",
+    color: "#fff",
+    padding: "0 5px",
+    verticalAlign: "top",
+    marginLeft: "-10px",
+    borderRadius: "20px",
   };
 
   const size = {
@@ -136,7 +143,7 @@ function Header() {
                 <img style={size} src="/assets/setting.png" alt="image" />{" "}
               </Link>{" "}
             </li>
-            <li style={list}>
+            <li style={{ ...list, position: "relative" }}>
               {" "}
               <Link to="/cart">
                 {" "}
@@ -146,7 +153,7 @@ function Header() {
                   alt="image"
                 />{" "}
                 {Object.entries(cart).length > 0 && (
-                  <span>
+                  <span style={cartIndicator}>
                     {cart?.reduce(
                       (qty, lineItem) => (qty += parseFloat(lineItem.quantity)),
                       0
