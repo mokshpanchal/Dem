@@ -57,7 +57,7 @@ function Home() {
       {/* trending card */}
       {trendingList?.length > 0 && (
         <div className="list_card">
-          <h4>
+          <h4 style={{textAlign: "center"}} >
             <strong>Trending</strong>
           </h4>
           <div className="content_card">
@@ -84,7 +84,7 @@ function Home() {
       {/* suggestions card */}
       {suggestionList?.length > 0 && (
         <div className="list_card">
-          <h4>
+          <h4 style={{textAlign: "center"}}>
             <strong>Suggestions</strong>
           </h4>
           <div className="content_card">

@@ -17,7 +17,7 @@ function Header() {
   const logo = {
     float: "left",
     width: "7vw",
-    height: "7vh",
+    height: "3vw",
     marginTop: "1vh",
   };
 

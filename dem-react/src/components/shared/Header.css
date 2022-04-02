@@ -19,3 +19,7 @@
     text-align: center;
     justify-content: center;
 } */
+.Header{
+    overflow: auto;
+    height: calc(99vh - 60vh);
+}

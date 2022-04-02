@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-SubscriptionPlan.create(price: 0, name: "Free Subscription", is_active: true, duration: 30, space_allowed: 102400, description: "Free plan", allow_to_buy: true, allow_to_publish: false)
+SubscriptionPlan.create(price: 0, name: "Free Subscription", is_active: true, duration: 30, space_allowed: 10240000, description: "Free plan", allow_to_buy: true, allow_to_publish: false)
 
-SubscriptionPlan.create(price: 20, name: "Business Subscription", is_active: true, duration: 30, space_allowed: 502400, description: "Business plan", allow_to_buy: true, allow_to_publish: true)
+SubscriptionPlan.create(price: 20, name: "Business Subscription", is_active: true, duration: 30, space_allowed: 50240000, description: "Business plan", allow_to_buy: true, allow_to_publish: true)
