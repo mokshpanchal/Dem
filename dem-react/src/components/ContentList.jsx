@@ -28,34 +28,6 @@ export default function ContentList() {
   console.log({ contentVideosList, contentAudiosList });
   return (
     <div className={`ContentList container`}>
-      <div className="upload_card">
-        <div>
-          <input
-            type="radio"
-            value="PUBLISHED"
-            name="published"
-            checked={currentView == "PUBLISHED"}
-            onClick={() => setCurrentView("PUBLISHED")}
-          />{" "}
-          published
-          <input
-            type="radio"
-            value="PURCHASED"
-            name="purchased"
-            checked={currentView == "PURCHASED"}
-            onClick={() => setCurrentView("PURCHASED")}
-          />{" "}
-          purchased
-          <input
-            type="radio"
-            value="DRAFTS"
-            name="drafts"
-            checked={currentView == "DRAFTS"}
-            onClick={() => setCurrentView("DRAFTS")}
-          />{" "}
-          drafts
-        </div>
-      </div>
       {/* videos card */}
       {contentVideosList?.length > 0 && (
         <div className="list_card">
