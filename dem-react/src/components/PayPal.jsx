@@ -1,12 +1,26 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
+import { ThemeContext } from "../App";
 
 export default function ReactPayPal() {
-  const [paid, setPaid] = React.useState(false);
-  const [error, setError] = React.useState(null);
-  const paypalRef = React.useRef();
+  const [paid, setPaid] = useState(false);
+  const [error, setError] = useState(null);
+  const [total, setTotal] = useState(0);
+  const paypalRef = useRef();
+  const { cart } = useContext(ThemeContext);
+  console.log("checkout page cart", { cart });
+  useEffect(() => {
+    if (!cart || !cart.length) return;
 
-  React.useEffect(() => {
+    setTotal(
+      cart.reduce(
+        (total, lineItem) => (total += parseFloat(lineItem.recordable.price)),
+        0
+      )
+    );
+  }, [cart]);
+  useEffect(() => {
+    if (!total) return;
     window.paypal
       .Buttons({
         createOrder: (data, actions) => {
@@ -17,7 +31,7 @@ export default function ReactPayPal() {
                 description: "Your description",
                 amount: {
                   currency_code: "CAD",
-                  value: 1.0,
+                  value: total,
                 },
               },
             ],
@@ -33,7 +47,7 @@ export default function ReactPayPal() {
         },
       })
       .render(paypalRef.current);
-  }, []);
+  }, [total]);
 
   if (paid) {
     return <div>Payment successful.!</div>;
@@ -45,7 +59,7 @@ export default function ReactPayPal() {
 
   return (
     <div className="payPal">
-      <h4>Total Amount in $CAD : 1 /-</h4>
+      <h4>Total Amount in $CAD : {total} /-</h4>
       <div ref={paypalRef} />
     </div>
   );

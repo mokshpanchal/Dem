@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  height: 500px;
+  text-align: left;
+}
+.cart_item {
+  display: inline-flex;
+  height: 100px;
+  width: 100%;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.cart_item > .price_part {
+  right: 0;
+  position: absolute;
+}
+.totalPart {
+  color: white;
+}

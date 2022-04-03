@@ -1,27 +1,13 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 import "../App.css";
-import { setAuthToken } from "../helpers/local-service";
-
-async function loginUser(creds) {
-  return fetch(`${process.env.REACT_APP_PUBLIC_URL}/users/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(creds),
-  }).then((data) => {
-    const headers = [...data.headers];
-    const authToken = headers.find((header) =>
-      header.find((headerPart) => headerPart.toLowerCase() === "authorization")
-    );
-    setAuthToken(authToken.pop());
-    return data;
-  });
-}
+import { setAuthToken, setLocalCart } from "../helpers/local-service";
+import { ThemeContext } from "../App";
+import { fetchApi } from "../helpers/fetcher";
+import { EMAIL_REGEX } from "../helpers/patterns";
 
 function Login() {
   const container = {
@@ -36,11 +22,43 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setCart } = useContext(ThemeContext);
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return email.length > 0 && EMAIL_REGEX.test(email) && password.length > 0;
   }
-
+  const getUserCart = async () => {
+    try {
+      let cartData = [];
+      const apiResponse = await fetchApi("/api/v1/cart_items");
+      console.log({ apiResponse });
+      if (apiResponse.status == 200) {
+        cartData = apiResponse.data.data;
+      }
+      await setCart(cartData);
+      await setLocalCart(cartData);
+    } catch (exception) {
+      console.error("error while fetching individual content", { exception });
+    }
+  };
+  const loginUser = async (creds) => {
+    return fetch(`${process.env.REACT_APP_PUBLIC_URL}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(creds),
+    }).then(async (data) => {
+      const headers = [...data.headers];
+      const authToken = headers.find((header) =>
+        header.find(
+          (headerPart) => headerPart.toLowerCase() === "authorization"
+        )
+      );
+      setAuthToken(authToken.pop());
+      return data;
+    });
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser({
@@ -53,14 +71,14 @@ function Login() {
       swal("Success", "Logged in successfully", "success", {
         buttons: false,
         timer: 2000,
-      }).then((value) => {
+      }).then(async (value) => {
+        await getUserCart();
         window.location.href = "/home";
       });
     } else {
       swal("Failed", "Please try again", "error");
     }
   };
-
   return (
     <div style={container} className="Login">
       <img

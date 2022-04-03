@@ -1,17 +1,13 @@
 /* eslint-disable */
 import React, { useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 export default function Welcome() {
-    const mystyle = {
-        backgroundImage: `url('./back.jpg')`,
-        backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat',
-        height: 500
-    }
+  const imgCard = {};
   return (
     <>
-    <div style={mystyle} className="Welcome">
-    </div>
+      <div className="Welcome"></div>
     </>
-  )
-};
+  );
+}

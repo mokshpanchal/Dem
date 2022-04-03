@@ -1,0 +1,26 @@
+/* .links:hover{
+    text-decoration: none;
+    color: white;
+    background: #114d79;
+} */
+
+/* .links
+{
+    display: block;
+    width: 9vw;
+    height: 3vw;
+    background: #156299;
+    padding: 0.5vh;
+    border-radius: 5vw;
+    color: white;
+    font-weight: bold;
+    line-height: 5vh;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    justify-content: center;
+} */
+.Header{
+    overflow: auto;
+    height: calc(99vh - 70vh);
+
+}
