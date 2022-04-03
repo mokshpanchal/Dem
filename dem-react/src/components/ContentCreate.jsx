@@ -5,12 +5,12 @@ import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
 import axios from "axios";
 import { getHeaders } from "../helpers/fetcher";
+import { AUDIO_EXTENSIONS, VIDEO_EXTENSIONS } from "../helpers/patterns";
 
 async function uploadFile(cId, file) {
   console.log({ file });
   let fd = new FormData();
   fd.append("material", file);
-  // const headers = { "Content-Type": "multipart/form-data" };
 
   const fileResponse = await axios.post(
     `${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents/uploadfile?content_id=${cId}`,
@@ -27,15 +27,6 @@ async function createContent(formdata, file) {
     description: formdata["content"]["description"],
     price: parseFloat(formdata["content"]["price"]),
   };
-  // console.log({ form });
-  // return fetch(`${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`, {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization: getAuthToken(),
-  //     "Content-Type": "multipart/form-data",
-  //   },
-  //   body: formData,
-  // });
   return axios
     .post(`${process.env.REACT_APP_PUBLIC_URL}/api/v1/contents`, form, {
       headers: getHeaders(),
@@ -45,7 +36,7 @@ async function createContent(formdata, file) {
       console.log("file inner", { file });
 
       await uploadFile(data.data.data.id, file);
-      debugger;
+      return data;
     });
 }
 
@@ -61,18 +52,22 @@ function ContentCreate() {
   };
   const params = new URLSearchParams(window.location.search);
   const content_type = params.get("content_type"); // bar
-
-  //   const [content_type, setContentType] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
   const [material, setMaterial] = useState();
-  const [binaryFile, setBinaryFile] = useState();
 
   function validateForm() {
-    return true;
+    return (
+      material &&
+      material.name &&
+      (AUDIO_EXTENSIONS.test(material.name) ||
+        VIDEO_EXTENSIONS.test(material.name)) &&
+      title.length &&
+      price &&
+      parseFloat(price) > 0
+    );
   }
-  console.log({ material });
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await createContent(
@@ -89,11 +84,11 @@ function ContentCreate() {
 
     if (response.status === 200 || response.status === 201) {
       console.log(response);
-      swal("Success", "Register to DEM successfully!", "success", {
+      swal("Success", "Content Uploaded successfully!", "success", {
         buttons: false,
         timer: 2000,
       }).then((value) => {
-        window.location.href = "/login";
+        window.location.href = "/content-list";
       });
     } else {
       swal("Failed", "Please try again", "error");
@@ -130,31 +125,25 @@ function ContentCreate() {
         <Form.Group size="lg" controlId="price">
           <Form.Label>Price</Form.Label>
           <Form.Control
-            type="float"
+            type="number"
+            step="0.1"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
         </Form.Group>
-
-        {/* <Form.Group size="lg" controlId="content_type">
-          <Form.Label>ContentType</Form.Label>
-          <Form.Control
-            type="text"
-            value={content_type}
-            onChange={(e) => setContentType(e.target.value)}
-          />
-        </Form.Group> */}
 
         <Form.Group size="lg" controlId="file">
           <Form.Label>File</Form.Label>
           <Form.Control
             autoFocus
             type="file"
+            accept="video/mp4,video/x-m4v,video/*,audio/mp3,audio/*"
             onChange={(e) => {
-              console.log(e);
-              setMaterial(e.target.files[0]);
+              const file = e.target.files[0];
+              setMaterial(file);
             }}
           />
+          <Form.Text>Only audio or video format</Form.Text>
         </Form.Group>
         <div style={{ marginTop: "2%", marginBottom: "2%" }}>
           <Button block size="lg" type="submit" disabled={!validateForm()}>

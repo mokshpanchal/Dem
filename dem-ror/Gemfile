@@ -31,7 +31,7 @@ gem 'money-rails'
 gem 'paypal-sdk-rest'
 gem 'mp3info'
 gem "active_model_serializers", require: true
-
+gem 'responders'
 # env variables
 gem 'dotenv-rails'
 

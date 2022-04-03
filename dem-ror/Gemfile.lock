@@ -291,6 +291,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-cors
   rails (~> 6.1.4, >= 6.1.4.7)
+  responders
   rspec-rails
   rswag
   rswag-specs

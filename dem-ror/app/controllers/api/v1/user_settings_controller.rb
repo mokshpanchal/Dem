@@ -9,6 +9,12 @@ module Api
 
       def update
       end
+
+      private
+
+      # def setting_params
+      #   params.require(:setting).permit()
+      # end
     end
   end
 end

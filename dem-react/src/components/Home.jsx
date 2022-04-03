@@ -8,23 +8,21 @@ function Home() {
   const [trendingList, setTrendingList] = useState([]);
   const [suggestionList, setSuggestionList] = useState([]);
 
-  // const submitMedia = () => {
-  //   console.log("upload media code");
-  // };
   const fetchDetails = async () => {
     const requestData = [
       {
-        path: "/photos",
+        path: "/api/v1/contents",
         responseKey: "photos",
       },
       {
-        path: "/todos",
-        responseKey: "todos",
+        path: "/api/v1/contents",
+        responseKey: "videos",
       },
     ];
     const apiResponse = await bulkAsyncFetchApi(requestData);
-    setTrendingList(apiResponse.photos);
-    setSuggestionList(apiResponse.todos);
+    console.log({ apiResponse });
+    setTrendingList(apiResponse.photos.data);
+    setSuggestionList(apiResponse.videos.data);
   };
   useEffect(() => {
     fetchDetails();
@@ -36,16 +34,30 @@ function Home() {
   return (
     <div className={`Upload container`}>
       <div className="upload_card">
-        <h4>Upload Your Content Now!</h4>
+        <h4 className="home_head">Upload your content here :</h4>
         <div className="upload_card_btn">
-          <Link to="/content/create?content_type=audio"> <img style={{ width: "6vh", height: "6vh", margin: 7 }} src="/assets/audio.png" alt="image" /> </Link>
-          <Link to="/content/create?content_type=video"> <img style={{ width: "6vh", height: "6vh", margin: 7 }} src="/assets/video.png" alt="image" /> </Link>
+          <Link to="/content/create?content_type=audio">
+            {" "}
+            <img
+              style={{ width: "6vh", height: "6vh", margin: "1vw" }}
+              src="/assets/audio.png"
+              alt="image"
+            />{" "}
+          </Link>
+          <Link to="/content/create?content_type=video">
+            {" "}
+            <img
+              style={{ width: "6vh", height: "6vh", margin: "1vw" }}
+              src="/assets/video.png"
+              alt="image"
+            />{" "}
+          </Link>
         </div>
       </div>
       {/* trending card */}
       {trendingList?.length > 0 && (
         <div className="list_card">
-          <h4>
+          <h4 style={{textAlign: "center"}} >
             <strong>Trending</strong>
           </h4>
           <div className="content_card">
@@ -72,7 +84,7 @@ function Home() {
       {/* suggestions card */}
       {suggestionList?.length > 0 && (
         <div className="list_card">
-          <h4>
+          <h4 style={{textAlign: "center"}}>
             <strong>Suggestions</strong>
           </h4>
           <div className="content_card">

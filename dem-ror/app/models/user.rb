@@ -17,8 +17,6 @@ class User < ApplicationRecord
   
   validate :check_file_type ,if: :avatar_attached
   
-  # after_create :set_default_settings, :active_free_plan
-
   def check_file_type
   	if avatar.content_type.in?(%w(image/gif image/png image/jpg image/jpeg))
   		return true
@@ -30,13 +28,4 @@ class User < ApplicationRecord
   def avatar_attached
   	avatar.attched?
   end
-
-  # def set_default_settings
-  #   UserSetting.new(user_id: current_user.id, discoverability: true,  notifications: true, email_promotion: true, publishable: true)
-  # end
-
-  # def active_free_plan
-
-  # end
-
 end

@@ -38,16 +38,16 @@ module Api
         # tempfile.binmode
         # tempfile.write(Base64.decode64(material))
         content.material = material
-        # content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
+        content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
         if content.save!
 
-          blob = content.material.blob
-          route = Rails.root.join('public', content.title)
+          # blob = content.material.blob
+          # route = Rails.root.join('public', content.title)
 
-          File.open(route, "wb+") do |file| 
-            blob.download { |chunk| file.write(chunk) }
-          end
-          content.link = route
+          # File.open(route, "wb+") do |file| 
+          #   blob.download { |chunk| file.write(chunk) }
+          # end
+          # content.link = route
           render_success_response(content, "File uploaded successfully", 200)
         else
           render_unprocessable_entity("Something went wrong", 422)
@@ -75,13 +75,8 @@ module Api
       def search
         if params[:search].present?
           query = params[:search].downcase
-          if params[:search] == "all"
-            locations = Content.all.pluck(:location).uniq
-            json = locations.map { |e| {e.to_sym => Content.where(location: e).count}}
-            return render json: json
-          end
-          if (params[:search].include? "own")
-            id = params[:search].split("-")[1].to_i
+          if (params[:search].include? "my")
+            id = current_user.id
             contents = Content.where(user_id: id)
             return render_success_response(array_serializer.new(contents, serializer: ContentSerializer, current_user: current_user),200)
           end

@@ -1,25 +1,14 @@
 module Api
   module V1
     class SubscriptionPlansController < ApplicationController
+      include ResourceRenderer
       def index
-      end
-
-      def create
-      end
-
-      def update
-      end
-
-      def edit
-      end
-
-      def destroy
-      end
-
-      def new
-      end
-
-      def show
+        plans = SubscriptionPlan.all
+        if plans.present?
+          render_success_response(array_serializer.new(plans, serializer: SubscriptionPlanSerializer, current_user: current_user), 200)
+        else
+          render_unprocessable_entity("Something went wrong", 422)
+        end
       end
     end
   end

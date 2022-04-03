@@ -72,3 +72,26 @@ export async function bulkAsyncFetchApi(pathObjects = []) {
     .catch((error) => error);
   return res;
 }
+export async function postApi(path = "/", body) {
+  return await axios
+    .post(`${BASE_API}${path}`, body, {
+      headers: getHeaders(),
+    })
+    .then((response) => response)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+}
+
+export async function deleteApi(path = "/") {
+  return await axios
+    .delete(`${BASE_API}${path}`, {
+      headers: getHeaders(),
+    })
+    .then((response) => response)
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+}

@@ -1,5 +1,5 @@
 class ContentSerializer < ActiveModel::Serializer
-  attributes  :id, :created_at, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug
+  attributes  :id, :created_at, :title, :content_type, :link, :description, :duration, :price, :file_size, :slug, :is_owner
   has_one :user, serializer: UserSerializer
   
   def created_at
@@ -16,4 +16,7 @@ class ContentSerializer < ActiveModel::Serializer
  		end
   end
 
+  def is_owner
+    instance_options[:current_user].present? &&  object.user == instance_options[:current_user] ? true : false
+  end
 end
