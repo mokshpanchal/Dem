@@ -1,16 +1,22 @@
 /* eslint-disable */
 import { Outlet, Link } from "react-router-dom";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../App";
-import { getLocalCart } from "../../helpers/local-service";
+import { getLocalCart, getAuthToken } from "../../helpers/local-service";
 
 function Header() {
   const { cart, setCart } = useContext(ThemeContext);
+  const [user, setUser] = useState(false);
+
   console.log("header cart", { cart });
   useEffect(() => {
     const localCart = getLocalCart();
+    const localUser = getAuthToken() || "";
     if (localCart) {
       setCart(localCart);
+    }
+    if (localUser) {
+      setUser(localUser.length > 0);
     }
   }, []);
   const logo = {
@@ -26,7 +32,7 @@ function Header() {
     display: "flex",
     justifyContent: "space-around",
     position: "absolute",
-    marginLeft: "40vw"
+    marginLeft: "40vw",
   };
 
   const navBar = {
@@ -52,7 +58,7 @@ function Header() {
     fontColor: "#156299",
     fontSize: "1.5em",
     textDecoration: "none",
-    marginRight: "1vw"
+    marginRight: "1vw",
   };
 
   const navListLeft = {
@@ -86,87 +92,109 @@ function Header() {
           <a href="/home">
             <img style={logo} src="/assets/logo.png"></img>
           </a>
-          <ul style={navListLeft}>
-            <li style={list}>
-              {" "}
-              <Link
-                style={{ color: "#156299", textDecoration: "none" }}
-                to="/content-list"
-              >
+          {user && (
+            <>
+              <ul style={navListLeft}>
+                <li style={list}>
+                  {" "}
+                  <Link
+                    style={{ color: "#156299", textDecoration: "none" }}
+                    to="/content-list"
+                  >
+                    {" "}
+                    Content{" "}
+                  </Link>{" "}
+                </li>
+                <li style={list}>
+                  {" "}
+                  <Link
+                    style={{ color: "#156299", textDecoration: "none" }}
+                    to="/plan"
+                  >
+                    {" "}
+                    Plans{" "}
+                  </Link>{" "}
+                </li>
+              </ul>
+              <div style={search}>
                 {" "}
-                Content{" "}
-              </Link>{" "}
-            </li>
-            <li style={list}>
-              {" "}
-              <Link
-                style={{ color: "#156299", textDecoration: "none" }}
-                to="/plan"
-              >
-                {" "}
-                Plans{" "}
-              </Link>{" "}
-            </li>
-          </ul>
-          <div style={search}>
-            {" "}
-            <form>
-              <input
-                style={{
-                  border: 0,
-                  borderRadius: 20,
-                  boxShadow:
-                    "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
-                }}
-                type="text"
-                name="search"
-              />
-              <Link to="/search">
-                {" "}
-                <img
-                  style={{ width: "2vw", height: "2vw", marginLeft: 3 }}
-                  src="/assets/search.png"
-                  alt="image"
-                />{" "}
-              </Link>{" "}
-            </form>
-          </div>
+                <form>
+                  <input
+                    style={{
+                      border: 0,
+                      borderRadius: 20,
+                      boxShadow:
+                        "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+                    }}
+                    type="text"
+                    name="search"
+                  />
+                  <Link to="/search">
+                    {" "}
+                    <img
+                      style={{ width: "2vw", height: "2vw", marginLeft: 3 }}
+                      src="/assets/search.png"
+                      alt="image"
+                    />{" "}
+                  </Link>{" "}
+                </form>
+              </div>
+            </>
+          )}
           <ul style={navListRight}>
-            {/* <li> <Link to="/login"> Login </Link> </li>
-            <li> <Link to="/signup"> Signup </Link> </li> */}
-            <li style={list}>
-              {" "}
-              <Link to="/profile">
-                {" "}
-                <img style={size} src="/assets/user.png" alt="image" />{" "}
-              </Link>{" "}
-            </li>
-            <li style={list}>
-              {" "}
-              <Link to="/setting">
-                {" "}
-                <img style={size} src="/assets/setting.png" alt="image" />{" "}
-              </Link>{" "}
-            </li>
-            <li style={{ ...list, position: "relative" }}>
-              {" "}
-              <Link to="/cart">
-                {" "}
-                <img
-                  style={size}
-                  src="/assets/shopping-cart.png"
-                  alt="image"
-                />{" "}
-                {Object.entries(cart).length > 0 && (
-                  <span style={cartIndicator}>
-                    {cart?.reduce(
-                      (qty, lineItem) => (qty += parseFloat(lineItem.quantity)),
-                      0
-                    ) || ""}
-                  </span>
-                )}
-              </Link>{" "}
-            </li>
+            {!user ? (
+              <>
+                <li>
+                  {" "}
+                  <Link to="/login"> Login </Link>{" "}
+                </li>
+                <li>
+                  {" "}
+                  <Link to="/signup"> Signup </Link>{" "}
+                </li>
+              </>
+            ) : (
+              <>
+                <li style={list}>
+                  {" "}
+                  <Link to="/profile">
+                    {" "}
+                    <img style={size} src="/assets/user.png" alt="image" />{" "}
+                  </Link>{" "}
+                </li>
+                <li style={list}>
+                  {" "}
+                  <Link to="/setting">
+                    {" "}
+                    <img
+                      style={size}
+                      src="/assets/setting.png"
+                      alt="image"
+                    />{" "}
+                  </Link>{" "}
+                </li>
+                <li style={{ ...list, position: "relative" }}>
+                  {" "}
+                  <Link to="/cart">
+                    {" "}
+                    <img
+                      style={size}
+                      src="/assets/shopping-cart.png"
+                      alt="image"
+                    />{" "}
+                    {Object.entries(cart).length > 0 && (
+                      <span style={cartIndicator}>
+                        {cart?.reduce(
+                          (qty, lineItem) =>
+                            (qty += parseFloat(lineItem.quantity)),
+                          0
+                        ) || ""}
+                      </span>
+                    )}
+                  </Link>{" "}
+                </li>
+              </>
+            )}
           </ul>
         </nav>
         <Outlet />

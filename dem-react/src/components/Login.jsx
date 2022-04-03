@@ -7,6 +7,7 @@ import "../App.css";
 import { setAuthToken, setLocalCart } from "../helpers/local-service";
 import { ThemeContext } from "../App";
 import { fetchApi } from "../helpers/fetcher";
+import { EMAIL_REGEX } from "../helpers/patterns";
 
 function Login() {
   const container = {
@@ -24,7 +25,7 @@ function Login() {
   const { setCart } = useContext(ThemeContext);
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return email.length > 0 && EMAIL_REGEX.test(email) && password.length > 0;
   }
   const getUserCart = async () => {
     try {

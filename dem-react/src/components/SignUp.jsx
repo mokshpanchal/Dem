@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import swal from "sweetalert";
+import { EMAIL_REGEX } from "../helpers/patterns";
 
 async function signupUser(creds) {
   return fetch(`${process.env.REACT_APP_PUBLIC_URL}/users/register`, {
@@ -33,7 +34,15 @@ function SignUp() {
   const [username, setUsername] = useState("");
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return (
+      email.length > 0 &&
+      EMAIL_REGEX.test(email) &&
+      password.length > 0 &&
+      name.length &&
+      phone.length &&
+      birth_date.length &&
+      username.length
+    );
   }
 
   const handleSubmit = async (e) => {

@@ -1,14 +1,15 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { postApi, fetchApi } from "../helpers/fetcher";
-import { getLocalUser, clearAllValues } from "../helpers/local-service";
+import { clearAllValues } from "../helpers/local-service";
 import swal from "sweetalert";
 
 import "../styles/UserProfile.css";
 
 export default function UserProfile() {
   const [user, setUser] = useState([]);
-  const logout = async () => {
+  const logout = async (e) => {
+    e.preventDefault();
     try {
       const apiResponse = await fetchApi("/users/logout");
       console.log({ apiResponse });
@@ -32,9 +33,17 @@ export default function UserProfile() {
       );
     }
   };
+  const getProfile = async () => {
+    try {
+      const apiResponse = await fetchApi("/users/register/edit/profile");
+      console.log({ apiResponse });
+    } catch (exception) {
+      console.error("error while fetching profile", { exception });
+    }
+  };
   useEffect(() => {
-    const localUser = getLocalUser();
-    setUser(localUser);
+    const localUser = getProfile();
+    // setUser(localUser);
   }, []);
   console.log({ user });
   return (

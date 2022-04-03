@@ -25,6 +25,7 @@ export const ThemeContext = createContext();
 
 function App() {
   const [cart, setCart] = useState(0);
+
   const ProtectedRoute = ({ children }) => {
     const authToken = getAuthToken();
     if (!authToken) {

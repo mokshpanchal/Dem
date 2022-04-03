@@ -25,11 +25,3 @@ export function setLocalCart(value) {
   const cart = JSON.stringify(value);
   return setValue("cart", cart);
 }
-export function getLocalUser() {
-  const user = getValue("user");
-  return user ? JSON.parse(user) : {};
-}
-export function setLocalUser(value) {
-  const user = JSON.stringify(value);
-  return setValue("user", user);
-}
