@@ -1,46 +1,58 @@
 /* eslint-disable */
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Home.css";
 import Toggle from "./ui/Toggle/Toggle";
 
 export default function Settings() {
-  const handleToggle = () => {
-    console.log("here");
-  };
+  const [discover, setDiscover] = useState(true);
+  const [email, setEmail] = useState(true);
+  const [newsLetters, setnewsLetters] = useState(true);
+  const [content, setcontent] = useState(true);
+
   return (
     <div className={`SignUp container`}>
       <h4>Settings</h4>
       <div className="settings_card">
         <div className="single_settings">
-          <p>testttttttttt</p>{" "}
+          <p>Account discoverability</p>{" "}
           <p>
-            <Toggle id={1} />
-          </p>
-        </div>
-        {/* <div className="single_settings">
-          <p>testttttttttt</p>{" "}
-          <p>
-            <Toggle id={2} active={true} handleToggle={handleToggle} />
-          </p>
-        </div>
-        <div className="single_settings">
-          <p>testttttttttt</p>{" "}
-          <p>
-            <Toggle id={3} handleToggle={handleToggle} />
+            <Toggle
+              id={1}
+              handleToggle={() => setDiscover(!discover)}
+              active={discover}
+            />
           </p>
         </div>
         <div className="single_settings">
-          <p>testttttttttt</p>{" "}
+          <p>Allow email notification</p>{" "}
           <p>
-            <Toggle id={4} handleToggle={handleToggle} />
+            <Toggle
+              id={2}
+              handleToggle={() => setEmail(!email)}
+              active={email}
+            />
           </p>
         </div>
         <div className="single_settings">
-          <p>testttttttttt</p>{" "}
+          <p>Newsletters and offers</p>{" "}
           <p>
-            <Toggle id={6} handleToggle={handleToggle} />
+            <Toggle
+              id={3}
+              handleToggle={() => setnewsLetters(!newsLetters)}
+              active={newsLetters}
+            />
           </p>
-        </div> */}
+        </div>
+        <div className="single_settings">
+          <p>Content rechability</p>{" "}
+          <p>
+            <Toggle
+              id={4}
+              handleToggle={() => setcontent(!content)}
+              active={content}
+            />
+          </p>
+        </div>
       </div>
     </div>
   );
