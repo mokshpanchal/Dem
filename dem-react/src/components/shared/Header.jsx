@@ -20,6 +20,11 @@ function Header() {
       setUser(localUser.length > 0);
     }
   }, []);
+
+  // const searchContent() => {
+
+  // }
+  
   const logo = {
     float: "left",
     width: "7vw",

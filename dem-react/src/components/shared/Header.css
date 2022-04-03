@@ -21,5 +21,6 @@
 } */
 .Header{
     overflow: auto;
-    height: calc(99vh - 60vh);
+    height: calc(99vh - 70vh);
+
 }

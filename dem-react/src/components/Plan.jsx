@@ -25,8 +25,11 @@ useEffect(() => {
 }, []);
 return (
     <>
+    <h2 className="planHead"> Subscription Plans for DEM</h2>
     <div className="Plan">
-      <div className="freePlan">
+      <div className="freePlan" id="particles-js">
+        <script type="text/javascript" src="/particles.js"></script>
+        <script type="text/javascript" src="/app_.js"></script>
         <p> <strong>{plans?.[0]?.name}</strong> </p>
         <p>  Price: {plans?.[0]?.price == 0 ? "Free" : plans?.[0]?.price + "$"} </p>
         <p>  Description: {plans?.[0]?.description}</p>
