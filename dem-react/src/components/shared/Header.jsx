@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../App";
 import { getLocalCart, getAuthToken } from "../../helpers/local-service";
+import "./Header.css";
 
 function Header() {
   const { cart, setCart } = useContext(ThemeContext);
@@ -22,7 +23,7 @@ function Header() {
   const logo = {
     float: "left",
     width: "7vw",
-    height: "7vh",
+    height: "3vw",
     marginTop: "1vh",
   };
 

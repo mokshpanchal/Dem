@@ -30,6 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   respond_with resource
     # end
     super
+    User.last.reload
+    UserSetting.create(user_id: User.last.id, discoverability: true,  notifications: true, email_promotion: true, publishable: true)
+    SubscriptionPlansUser.create(user_id: User.last.id, subscription_plan_id: 1, status: 1, expires_on: DateTime.now + 30.days , space_allowed: 10240000)
     UserMailer.with(user: resource).welcome_email.deliver_now if resource.persisted?
   end
 

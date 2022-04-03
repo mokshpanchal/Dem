@@ -104,7 +104,7 @@ function App() {
                 />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/plans" element={<Plan />} />
+                <Route path="/plan" element={<Plan />} />
                 <Route
                   path="/content-list"
                   element={
