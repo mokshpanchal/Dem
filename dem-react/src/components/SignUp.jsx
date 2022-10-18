@@ -24,8 +24,9 @@ function SignUp() {
     border: 0,
     boxShadow:
       "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+      backgroundColor: "white"
   };
-
+  const space_around = { marginTop: "2%", marginBottom: "2%",};
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -82,44 +83,58 @@ function SignUp() {
       />
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          {/* <Form.Label>Email</Form.Label> */}
           <Form.Control
             autoFocus
             type="email"
             value={email}
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
+        <Form.Group style={space_around} size="lg" controlId="password">
+          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control
             type="password"
             value={password}
+            placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group size="lg" controlId="name">
-          <Form.Label>Name</Form.Label>
+        <Form.Group style={space_around} size="lg" controlId="username">
+          {/* <Form.Label>Username</Form.Label> */}
+          <Form.Control
+            type="text"
+            value={username}
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group style={space_around} size="lg" controlId="name">
+          {/* <Form.Label>Name</Form.Label> */}
           <Form.Control
             type="text"
             value={name}
+            placeholder="Name"
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group size="lg" controlId="phone">
-          <Form.Label>Phone</Form.Label>
+        <Form.Group style={space_around} size="lg" controlId="phone">
+          {/* <Form.Label>Phone</Form.Label> */}
           <Form.Control
             type="text"
             value={phone}
+            placeholder="Phone"
             onChange={(e) => setPhone(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Group size="lg" controlId="birthdate">
-          <Form.Label>Birth Date</Form.Label>
+        <Form.Group style={space_around} size="lg" controlId="birthdate">
+          <Form.Text>Birth Date</Form.Text>
           <Form.Control
             type="date"
             name="birthdate"
@@ -129,21 +144,13 @@ function SignUp() {
           />
         </Form.Group>
 
-        <Form.Group size="lg" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <div style={{ marginTop: "2%", marginBottom: "2%" }}>
+        <div style={space_around}>
           <Button block size="lg" type="submit" disabled={!validateForm()}>
             SignUp
           </Button>
         </div>
         <div>
-          <a href="/login"> Already have an account? </a>
+          <a  style={{fontWeight: "bold", color: "#156299"}} href="/login"> Already have an account? </a>
         </div>
       </Form>
     </div>

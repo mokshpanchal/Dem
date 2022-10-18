@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/Plan.css'
 import { fetchApi } from "../helpers/fetcher";
+import Button from "react-bootstrap/Button";
 
 export default function Plan() {
 const [plans, setPlans] = useState([]);
@@ -25,8 +26,11 @@ useEffect(() => {
 }, []);
 return (
     <>
-    <h2 className="planHead"> Subscription Plans for DEM</h2>
-    <div className="Plan">
+    <div className="container">
+      <div className="card_head">
+        <h2 className="planHead"> Subscription Plans for DEM</h2>
+      </div>
+      <div className="plan_cards">
       <div className="freePlan" id="particles-js">
         <script type="text/javascript" src="/particles.js"></script>
         <script type="text/javascript" src="/app_.js"></script>
@@ -37,6 +41,15 @@ return (
         <p>  Allow to buy: {plans?.[0]?.allow_to_buy == 1? "Yes": "No"}</p>
         <p>  Allow to sell: {plans?.[0]?.allow_to_publish == 1? "Yes": "No"}</p>
         <p>  Space Allocated: {(plans?.[0]?.space_allowed/1024)/1000} GB</p>
+        <Button
+            variant="primary"
+            block
+            size="lg"
+            type="submit"
+            disabled
+          >
+          Activated
+        </Button>
       </div>
       <div className="businessPlan">
         <p> <strong>{plans?.[1]?.name}</strong> </p>
@@ -46,6 +59,15 @@ return (
         <p>  Allow to buy: {plans?.[1]?.allow_to_buy == 1? "Yes": "No"}</p>
         <p>  Allow to sell: {plans?.[1]?.allow_to_publish == 1? "Yes": "No"}</p>
         <p>  Space Allocated: {(plans?.[1]?.space_allowed/1024)/1000} GB</p>
+        <Button
+            variant="primary"
+            block
+            size="lg"
+            onClick={() => (window.location.href = "/checkout")}
+          >
+          Activate
+        </Button>
+      </div>
       </div>
     </div>
     </>

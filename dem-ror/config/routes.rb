@@ -32,6 +32,7 @@ Rails.application.routes.draw do
           resources :notifications
           resources :user_settings
           post 'contents/uploadfile' => 'contents#upload_file'
+	  get '/search' => 'contents#search', as: :search
         end
     end
 end

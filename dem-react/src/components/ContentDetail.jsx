@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchApi, postApi } from "../helpers/fetcher";
@@ -6,6 +7,8 @@ import ReactPlayer from "react-player";
 import { ThemeContext } from "../App";
 import swal from "sweetalert";
 import { setLocalCart } from "../helpers/local-service";
+import Button from "react-bootstrap/Button";
+
 
 export default function ContentDetail() {
   const { id = 0 } = useParams();
@@ -108,12 +111,13 @@ export default function ContentDetail() {
     <div className="parent_div">
       <div className="first_half">
         <div className="media_block">
-          <img src="/mp3-default.png" width={"100%"} height={"100%"} />
+          <img src={content?.content_type == "audio" ? "/assets/cover1.jpg" : "/assets/cover2.jpg"} width={"100%"} height={"100%"} />
           {showPreview && (
             <ReactPlayer
               forceaudio={content?.content_type == "audio"}
               forcevideo={content?.content_type == "video"}
-              url={`${process.env.REACT_APP_PUBLIC_URL}${content?.link}`}
+              //url={`${process.env.REACT_APP_PUBLIC_URL}${content?.link}`}
+		url={`/assets/sample.mp4`}
               className="react-player"
               width="100%"
               height="100%"
@@ -137,8 +141,10 @@ export default function ContentDetail() {
         </div>
       </div>
       <div className="second_half">
-        <h1>{content?.title}</h1>
-        <p>{content?.description}</p>
+        <div className="head">
+          <h1>{content?.title}</h1>
+          <p id="desc">{content?.description}</p>
+        </div>
         <table>
           <tr>
             <td>
@@ -160,20 +166,47 @@ export default function ContentDetail() {
           </tr>
         </table>
         <div className="preview-btns">
-          <button
+          <Button
+              variant="primary"
+              block
+              size="lg"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowPreview(true);
+              }}
+            >
+            See Preview
+          </Button>
+          {/* <button
             onClick={(e) => {
               e.preventDefault();
               setShowPreview(true);
             }}
           >
             See Preview
-          </button>
+          </button> */}
           {!content?.is_owner && (
             <>
               {checkProductExistsInCart() ? null : (
-                <button onClick={addToCart}>Add to Cart</button>
+              <Button
+                 variant="primary"
+                 block
+                 size="lg"
+                 onClick={addToCart}
+               >
+               Add to Cart
+              </Button>
+                // <button onClick={addToCart}>Add to Cart</button>
               )}
-              <button onClick={reportContent}>Report Content</button>
+               <Button
+                 variant="danger"
+                 block
+                 size="lg"
+                 onClick={reportContent}
+               >
+               Report Content
+              </Button>
+              {/* <button onClick={reportContent}>Report Content</button> */}
             </>
           )}
         </div>

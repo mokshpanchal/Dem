@@ -40,3 +40,32 @@
 li {
   list-style-type: none;
 }
+
+a{
+  text-decoration: none;
+}
+
+.App {animation: gradient 10s ease infinite;
+background: linear-gradient(-45deg, #ffffff, #ffffff, #156299, #156299);
+background-size: 400% 400%;}
+@keyframes gradient 
+{
+	0% 
+    {
+		background-position: 0% 50%;
+	}
+	50% 
+    {
+		background-position: 100% 50%;
+	}
+	100% 
+    {
+		background-position: 0% 50%;
+	}
+}
+
+.btn-primary, .btn-primary:disabled, .btn-primary.disabled{
+  background-color: #11598D !important;
+  border-width: 0 !important;
+  border-color: #11598D !important;
+}

@@ -9,7 +9,7 @@
     display: block;
     width: 9vw;
     height: 3vw;
-    background: #156299;
+    background: #11598D;
     padding: 0.5vh;
     border-radius: 5vw;
     color: white;
@@ -21,6 +21,51 @@
 } */
 .Header{
     overflow: auto;
-    height: calc(99vh - 70vh);
+    background-color: white;
+}
 
+a{
+    text-decoration: none !important;
+}
+
+input:focus {
+    outline: none !important;
+  }
+
+/* ---------MEDIA QUERIES--------------------- */
+@media only screen and (max-width:768px){
+
+    .logo{
+        height: 2vh !important;
+        width: 4vh !important;
+        margin-top: 2vh !important;
+    }
+
+    .search{
+        top: 10vh;
+        right: 10%;
+        width: 70%
+    }
+
+    .navListLeft{
+        flex-direction: row !important;
+        margin-left: 5vw !important;
+        justify-content: space-between !important;
+    }
+
+    .navListLeft li {
+        font-size: 1em !important;
+    }
+
+    .navListRight{
+        flex-direction: row !important;
+        margin-right: 10vw !important;
+        margin-top: 0.5vh !important;
+        justify-content: space-between !important;
+    }
+
+    .navListRight li img {
+       height: 2vh !important;
+       width: 2vh !important;
+    }
 }

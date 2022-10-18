@@ -80,7 +80,7 @@ module Api
             contents = Content.where(user_id: id)
             return render_success_response(array_serializer.new(contents, serializer: ContentSerializer, current_user: current_user),200)
           end
-          contents = Content.where('lower(title) LIKE ? OR lower(description) LIKE ? OR lower(price) LIKE ? OR lower(slug) LIKE ?',"%#{query}%","%#{query}%","%#{query}%","%#{query}%")
+          contents = Content.where('lower(title) LIKE ? OR lower(description) LIKE ? ',"%#{query}%","%#{query}%")
           return render_success_response(array_serializer.new(contents, serializer: ContentSerializer, current_user: current_user),200)
         else
           index()
