@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import "../App.css";
 
 async function resetPass(password, confirmPassword, token) {
-  const url = `http://localhost:3000/users/secret`;
+  const url = `${process.env.REACT_APP_PUBLIC_URL}/users/secret`;
   return fetch(url, {
     method: "PUT",
     headers: {
@@ -33,6 +33,7 @@ function ForgotPassword() {
     border: 0,
     boxShadow:
       "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+    backgroundColor: "white"
   };
 
   const [password, setPassword] = useState("");
@@ -51,7 +52,7 @@ function ForgotPassword() {
         buttons: false,
         timer: 2000,
       }).then((value) => {
-        window.location.href = "/home";
+        window.location.href = "/login";
       });
     } else if (response.status == 422) {
       swal(response.errors, "Please try with another link", "error");

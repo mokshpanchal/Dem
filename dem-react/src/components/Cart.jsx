@@ -5,17 +5,18 @@ import "../styles/Cart.css";
 import swal from "sweetalert";
 import { ThemeContext } from "../App";
 import { setLocalCart } from "../helpers/local-service";
+import { Button } from "react-bootstrap";
 
 export default function Cart() {
   const [userCart, setUserCart] = useState(null);
-  const mystyle = {
-    backgroundImage: `url('./back.jpg')`,
-    backgroundSize: "100% 100%",
-    backgroundRepeat: "no-repeat",
-    height: 500,
-  };
+  // const mystyle = {
+  //   backgroundImage: `url('./back.jpg')`,
+  //   backgroundSize: "100% 100%",
+  //   backgroundRepeat: "no-repeat",
+  //   height: 500,
+  // };
   const { cart, setCart } = useContext(ThemeContext);
-
+  var randomImages = ["/assets/cover.jpg", "/assets/cover1.jpg", "/assets/cover2.jpg", "/assets/cover3.jpg", "/assets/cover4.jpg", "/assets/cover5.jpg"]
   const getUserCart = async () => {
     try {
       let cartData = [];
@@ -63,44 +64,46 @@ export default function Cart() {
   console.log({ userCart });
 
   return (
-    <div style={mystyle}>
+    <div>
       <div className="container">
-        <h3>Cart</h3>
+        <h3 style={{color: "#11598D", fontWeight: "bold"}} >Cart</h3>
         {userCart &&
           Object.entries(userCart).length > 0 &&
           userCart.map((cartItem) => (
             <div className="cart_item">
               <img
                 src={
-                  cartItem.recordable.content_type == "audio"
-                    ? "/mp3-default.png"
-                    : "/mp3-default.png"
+                  randomImages[Math.floor(Math.random()*randomImages.length)]
                 }
                 height={50}
                 width={50}
               />
-              <p>{cartItem.recordable.title}</p>
-              <span className="price_part">
-                CAD ${cartItem.recordable.price}
-                <button onClick={(e) => removeItem(e, cartItem.id)}>
-                  remove
-                </button>
-              </span>
+              <div className="cart_content">
+              <p style={{color: "#11598D", fontWeight: "bold", margin: 0}} >{cartItem.recordable.title}</p>
+              <p style={{color: "#11598D", margin: 0, textTransform: 'capitalize'}} >{cartItem.recordable.content_type}</p>
+              <p style={{color: "#11598D", margin: 0, textTransform: 'capitalize'}} > by {cartItem.user.name}</p>
+              </div>
+              <div className="price_part">
+                <p style={{color: "#11598D", marginTop: "1vw",}}> ${cartItem.recordable.price} </p>
+                <Button style={{marginLeft: "1vw"}} onClick={(e) => removeItem(e, cartItem.id)}>
+                  Remove
+                </Button>
+              </div>
             </div>
           ))}
         {userCart && Object.entries(userCart).length > 0 && (
           <div className="totalPart">
-            <h4>
-              Total: CAD $
+            <h4 style={{color: "#11598D", fontWeight: "bold"}}>
+              Total:  $
               {userCart.reduce(
                 (total, lineItem) =>
                   (total += parseFloat(lineItem.recordable.price)),
                 0
               )}
             </h4>
-            <button onClick={() => (window.location.href = "/checkout")}>
+            <Button onClick={() => (window.location.href = "/checkout")}>
               Checkout
-            </button>
+            </Button>
           </div>
         )}
       </div>

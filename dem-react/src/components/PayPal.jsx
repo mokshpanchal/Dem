@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, { useState, useRef, useContext, useEffect } from "react";
 import { ThemeContext } from "../App";
+import '../styles/PayPal.css'
 
 export default function ReactPayPal() {
   const [paid, setPaid] = useState(false);
@@ -59,8 +60,12 @@ export default function ReactPayPal() {
 
   return (
     <div className="payPal">
-      <h4>Total Amount in $CAD : {total} /-</h4>
-      <div ref={paypalRef} />
+      <div className="container">
+        <h1 style={{color: "#11598D", fontWeight: "bold"}}> Checkout </h1>
+        <h4  style={{color: "#11598D", fontWeight: "bold"}}>Total Amount in $CAD : {total} /-</h4>
+        <div ref={paypalRef} />
+        <h2 style={{border: "5px dashed red", color: "#11598D", borderRadius: "10px"}}> Disclaimer: This website do-not sell any product. The payment gateway is purely for educational and demonstration purposes only. If you are a visitor to website. Please do-not proceed to pay. Owners of this website will not be liable for any kind of transaction.</h2>
+      </div>
     </div>
   );
 }
