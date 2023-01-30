@@ -1,7 +1,8 @@
 /* eslint-disable */
+import './Footer.css'
 const Footer = () => {
   const footer = {
-    backgroundColor: "#156299",
+    backgroundColor: "#11598D",
     height: 230,
     position: "relative",
     bottom: 0,
@@ -30,6 +31,7 @@ const Footer = () => {
   const line = {
     backgroundColor: "white",
     width: "90%",
+    marginLeft: "4vw"
   };
   const lowerFooter = {
     color: "white",
@@ -40,11 +42,11 @@ const Footer = () => {
     <>
       <div style={footer} className="Footer">
         <a href="/home">
-          <img style={footerLogo} src="/assets/logo-whiteBG-round.png" alt="" />
+          <img className="footerLogo" style={footerLogo} src="/assets/logo-whiteBG-round.png" alt="" />
         </a>
         <div >
           <div>
-            <ul style={footerList}>
+            <ul className="footerList"style={footerList}>
               {/* <li style={bold}>Social Links</li> */}
               <li>
                 <a
@@ -103,8 +105,8 @@ const Footer = () => {
             </ul>
           </div> */}
         </div>
-        <hr style={line} />
-        <p style={lowerFooter}>
+        <hr className="line" style={line} />
+        <p className="lowerFooter" style={lowerFooter}>
           &copy; 2022{" "}
           <a
             style={{ color: "white", textDecoration: "none" }}

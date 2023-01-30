@@ -10,11 +10,11 @@ export default function Settings() {
   const [content, setcontent] = useState(true);
 
   return (
-    <div className={`SignUp container`}>
-      <h4>Settings</h4>
+    <div className={`container`}>
+      <h3 style={{color: "#11598D", fontWeight: "bold"}} > Settings </h3>
       <div className="settings_card">
         <div className="single_settings">
-          <p>Account discoverability</p>{" "}
+          <p style={{color: "#11598D"}} >Account discoverability</p>{" "}
           <p>
             <Toggle
               id={1}
@@ -24,7 +24,7 @@ export default function Settings() {
           </p>
         </div>
         <div className="single_settings">
-          <p>Allow email notification</p>{" "}
+          <p style={{color: "#11598D"}} >Allow email notification</p>{" "}
           <p>
             <Toggle
               id={2}
@@ -34,7 +34,7 @@ export default function Settings() {
           </p>
         </div>
         <div className="single_settings">
-          <p>Newsletters and offers</p>{" "}
+          <p style={{color: "#11598D"}} >Newsletters and offers</p>{" "}
           <p>
             <Toggle
               id={3}
@@ -44,7 +44,7 @@ export default function Settings() {
           </p>
         </div>
         <div className="single_settings">
-          <p>Content rechability</p>{" "}
+          <p style={{color: "#11598D"}} >Content rechability</p>{" "}
           <p>
             <Toggle
               id={4}

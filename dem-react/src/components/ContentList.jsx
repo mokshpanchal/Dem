@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { fetchApi } from "../helpers/fetcher";
 import { Outlet, Link } from "react-router-dom";
-
+import '../styles/Home.css'
 export default function ContentList() {
   const [contentVideosList, setContentVideosList] = useState([]);
   const [contentAudiosList, setContentAudiosList] = useState([]);
   const [currentView, setCurrentView] = useState("PUBLISHED");
-
+  var randomImages = ["/assets/cover.jpg", "/assets/cover1.jpg", "/assets/cover2.jpg", "/assets/cover3.jpg", "/assets/cover4.jpg", "/assets/cover5.jpg"]
   const fetchDetails = async () => {
     let contentData = [];
     const apiResponse = await fetchApi("/api/v1/contents");
@@ -16,10 +16,10 @@ export default function ContentList() {
       contentData = apiResponse.data.data;
     }
     setContentVideosList(
-      contentData.filter((content) => content.content_type == "video")
+      contentData.filter((content) => content.content_type == "video" && content.is_owner)
     );
     setContentAudiosList(
-      contentData.filter((content) => content.content_type == "audio")
+      contentData.filter((content) => content.content_type == "audio" && content.is_owner)
     );
   };
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ContentList() {
   }, []);
   console.log({ contentVideosList, contentAudiosList });
   return (
-    <div className={`ContentList container`}>
+    <div className={`ContentList`}>
       {/* videos card */}
       {contentVideosList?.length > 0 && (
         <div className="list_card">
@@ -40,7 +40,7 @@ export default function ContentList() {
                 <div className="single_card">
                   <div className="first_card">
                     <img
-                      src={content.thumbnailUrl || "logo192.png"}
+                      src={content.thumbnailUrl || randomImages[Math.floor(Math.random()*randomImages.length)]}
                       alt="Cinque Terre"
                       height={120}
                       width={180}
@@ -68,7 +68,7 @@ export default function ContentList() {
                 <div className="single_card">
                   <div className="first_card">
                     <img
-                      src={content.thumbnailUrl || "mp3-default.png"}
+                      src={content.thumbnailUrl || randomImages[Math.floor(Math.random()*randomImages.length)]}
                       alt="Cinque Terre"
                       height={120}
                       width={180}

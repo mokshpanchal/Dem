@@ -49,6 +49,7 @@ function ContentCreate() {
     border: 0,
     boxShadow:
       "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+      backgroundColor: "white"
   };
   const params = new URLSearchParams(window.location.search);
   const content_type = params.get("content_type"); // bar
