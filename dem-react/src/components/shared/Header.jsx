@@ -61,7 +61,7 @@ function Header() {
 
   const list = {
     fontWeight: "bold",
-    fontColor: "#156299",
+    fontColor: "#11598D",
     fontSize: "1.5em",
     textDecoration: "none",
     marginRight: "1vw",
@@ -78,12 +78,13 @@ function Header() {
 
   const cartIndicator = {
     fontSize: "15px",
-    background: "#156299",
+    background: "#11598D",
     color: "#fff",
     padding: "0 5px",
     verticalAlign: "top",
     marginLeft: "-10px",
     borderRadius: "20px",
+    position: "absolute"
   };
 
   const size = {
@@ -94,17 +95,17 @@ function Header() {
   return (
     <>
       <div className="Header">
-        <nav style={navBar}>
+        <nav className="nav" style={navBar}>
           <a href="/home">
-            <img style={logo} src="/assets/logo.png"></img>
+            <img className="logo" style={logo} src="/assets/logo.png"></img>
           </a>
           {user && (
             <>
-              <ul style={navListLeft}>
+              <ul className="navListLeft" style={navListLeft}>
                 <li style={list}>
                   {" "}
                   <Link
-                    style={{ color: "#156299", textDecoration: "none" }}
+                    style={{ color: "#11598D", textDecoration: "none" }}
                     to="/content-list"
                   >
                     {" "}
@@ -114,7 +115,7 @@ function Header() {
                 <li style={list}>
                   {" "}
                   <Link
-                    style={{ color: "#156299", textDecoration: "none" }}
+                    style={{ color: "#11598D", textDecoration: "none" }}
                     to="/plan"
                   >
                     {" "}
@@ -122,15 +123,14 @@ function Header() {
                   </Link>{" "}
                 </li>
               </ul>
-              <div style={search}>
+              <div className="search" style={search}>
                 {" "}
-                <form>
+                <form action="/search" method="get">
                   <input
                     style={{
                       border: 0,
                       borderRadius: 20,
-                      boxShadow:
-                        "0 2.8px 2.2px rgba(0, 0, 0, 0.034),\n  0 6.7px 5.3px rgba(0, 0, 0, 0.048),\n  0 12.5px 10px rgba(0, 0, 0, 0.06),\n  0 22.3px 17.9px rgba(0, 0, 0, 0.072),\n  0 41.8px 33.4px rgba(0, 0, 0, 0.086),\n  0 100px 80px rgba(0, 0, 0, 0.12)",
+                      boxShadow: "0 1px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.1)",
                     }}
                     type="text"
                     name="search"
@@ -147,16 +147,16 @@ function Header() {
               </div>
             </>
           )}
-          <ul style={navListRight}>
+          <ul className="navListRight" style={navListRight}>
             {!user ? (
               <>
                 <li>
                   {" "}
-                  <Link to="/login"> Login </Link>{" "}
+                  <Link style={{fontWeight: "bold", color: "#156299"}} to="/login"> Login </Link>{" "}
                 </li>
                 <li>
                   {" "}
-                  <Link to="/signup"> Signup </Link>{" "}
+                  <Link style={{fontWeight: "bold", color: "#156299"}} to="/signup"> Signup </Link>{" "}
                 </li>
               </>
             ) : (

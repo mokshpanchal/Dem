@@ -1,16 +1,26 @@
-.Plan {
+.container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 30vw;
+    flex-direction: column !important;
+    margin-top: 5vw;
     margin-bottom: 5vw;
+    background-color: #fff;
+    height: 50vw;
   }
+
+.plan_cards
+{
+  display: flex;
+  flex-direction: row;
+  margin: 1vw;
+  justify-content: center;
+}
 
 .freePlan {
     justify-content: center;
     align-items: center;
-    width: 30%;
+    /* width: 30%; */
     padding: 10vh;
+    margin: 0 3vw;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
@@ -20,7 +30,7 @@
 .businessPlan {
   justify-content: center;
   align-items: center;
-  width: 30%;
+  /* width: 30%; */
   padding: 10vh;
   display: flex;
   flex-direction: column;
@@ -29,7 +39,7 @@
 }
 
 .planHead{
-  color: #156299;
+  color: #11598D;
   margin-bottom: 2vw;
   font-weight: bold;
 }
