@@ -2,4 +2,4 @@
 
 # DEM - creator's platform
 
-## :seedling: Developed by: [Moksh panchal](https://www.linkedin.com/in/moksh-panchal/)
+## :seedling: Developed by: [Moksh](https://www.linkedin.com/in/moksh-panchal/)
