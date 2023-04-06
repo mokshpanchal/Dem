@@ -2,4 +2,4 @@
 
 # DEM - creator's platform
 
-## :seedling: Developed by: <img src="https://raw.githubusercontent.com/mokshpanchal/Dem/v1-develop/dem-react/public/dev.jpeg" alt="Moksh" width=5.5% style="border-radius: 55%">
+## :seedling: Developed by: [Moksh panchal](https://www.linkedin.com/in/moksh-panchal/)
