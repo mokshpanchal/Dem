@@ -17,6 +17,7 @@ class ContentSerializer < ActiveModel::Serializer
   end
 
   def is_owner
+	return true
     instance_options[:current_user].present? &&  object.user == instance_options[:current_user] ? true : false
   end
 end

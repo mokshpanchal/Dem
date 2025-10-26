@@ -8,6 +8,7 @@ export function getHeaders(headers = {}) {
   const authToken = getAuthToken();
   headers = {
     ...headers,
+    "ngrok-skip-browser-warning": "true",
     "Content-Type": "application/json",
   };
   headers = authToken

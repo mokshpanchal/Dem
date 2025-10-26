@@ -46,6 +46,14 @@ function App() {
     cart,
     setCart,
   };
+
+  const style = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "justify-content",
+    scrollBehavior: "auto"
+  };
+
   useEffect(() => {
     const localCart = getLocalCart();
     setCart(localCart);
@@ -53,7 +61,7 @@ function App() {
   return (
     <>
       <ThemeContext.Provider value={value}>
-        <div className="App">
+        <div className="App" style={style}>
           <BrowserRouter>
             <Fragment>
               <Header />

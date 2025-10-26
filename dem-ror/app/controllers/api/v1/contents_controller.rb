@@ -14,7 +14,7 @@ module Api
 
       def create
         content = Content.new(content_params.except(:material))
-        content.user_id = current_user.id
+        content.user_id = current_user&.id || 1
         if content.save!
           render_success_response(content, "Content created successfully", 200)
         else
@@ -32,26 +32,20 @@ module Api
       end
 
       def upload_file
-        content = Content.find(params[:content_id])
+        content  = Content.find(params[:content_id])
         material = params[:material]
-        # tempfile  = Tempfile.new(content.id.to_s)
-        # tempfile.binmode
-        # tempfile.write(Base64.decode64(material))
-        content.material = material
-        content.link =  Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
-        if content.save!
 
-          # blob = content.material.blob
-          # route = Rails.root.join('public', content.title)
+        content.material.attach(material)
 
-          # File.open(route, "wb+") do |file| 
-          #   blob.download { |chunk| file.write(chunk) }
-          # end
-          # content.link = route
-          render_success_response(content, "File uploaded successfully", 200)
-        else
-          render_unprocessable_entity("Something went wrong", 422)
-        end
+        content.save!
+
+        content.update!(
+          link: Rails.application.routes.url_helpers.rails_blob_path(content.material, only_path: true)
+        )
+
+        render_success_response(content, "File uploaded successfully", 200)
+      rescue ActiveRecord::RecordInvalid => e
+        render_unprocessable_entity("Something went wrong", 422)
       end
 
       def update
@@ -76,7 +70,7 @@ module Api
         if params[:search].present?
           query = params[:search].downcase
           if (params[:search].include? "my")
-            id = current_user.id
+            id = current_user.&id || 1
             contents = Content.where(user_id: id)
             return render_success_response(array_serializer.new(contents, serializer: ContentSerializer, current_user: current_user),200)
           end

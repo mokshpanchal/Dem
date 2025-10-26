@@ -26,6 +26,6 @@ class User < ApplicationRecord
   end
 
   def avatar_attached
-  	avatar.attched?
+  	avatar.attached?
   end
 end

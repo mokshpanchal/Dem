@@ -19,7 +19,7 @@ export function setAuthToken(value) {
 }
 export function getLocalCart() {
   const cart = getValue("cart");
-  return cart ? JSON.parse(cart) : {};
+  return cart != "undefined" ? JSON.parse(cart) : {};
 }
 export function setLocalCart(value) {
   const cart = JSON.stringify(value);

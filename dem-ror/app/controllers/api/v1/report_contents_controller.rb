@@ -6,7 +6,7 @@ module Api
       # end
 
       def create
-        report = ReportContent.new(user_id: current_user.id, content_id: report_content_params[:content_id])
+        report = ReportContent.new(user_id: current_user.&id || 1, content_id: report_content_params[:content_id])
         if report.save!
           render_success_response(report, "Content Reported!", 200)
         else

@@ -4,7 +4,7 @@ const Footer = () => {
   const footer = {
     backgroundColor: "#11598D",
     height: 230,
-    position: "relative",
+    // position: 'absolute',
     bottom: 0,
     width: "100%",
     paddingTop: 10,

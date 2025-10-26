@@ -17,10 +17,10 @@ export default function Search() {
       contentData = apiResponse.data.data;
     }
     setContentVideosList(
-      contentData.filter((content) => content.content_type == "video" && content.is_owner)
+      contentData?.filter((content) => content.content_type == "video" && content.is_owner)
     );
     setContentAudiosList(
-      contentData.filter((content) => content.content_type == "audio" && content.is_owner)
+      contentData?.filter((content) => content.content_type == "audio" && content.is_owner)
     );
   };
   useEffect(() => {

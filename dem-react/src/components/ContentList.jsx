@@ -13,7 +13,7 @@ export default function ContentList() {
     const apiResponse = await fetchApi("/api/v1/contents");
     console.log({ apiResponse });
     if (apiResponse.status == 200) {
-      contentData = apiResponse.data.data;
+      contentData = apiResponse.data.data || [];
     }
     setContentVideosList(
       contentData.filter((content) => content.content_type == "video" && content.is_owner)
