@@ -3,7 +3,7 @@ module Api
     class CartItemsController < ApplicationController
       include ResourceRenderer
       def index
-        items = CartItem.where(user_id: current_user.id)
+        items = CartItem.where(user_id: current_user.&id || 1)
         if items.present?
           render_success_response(array_serializer.new(items.reverse, serializer: CartItemSerializer, current_user: current_user), 200)
         else
@@ -12,7 +12,7 @@ module Api
       end
 
       def create
-        cart_item = CartItem.new(quantity: 1, recordable_type: 'Content', recordable_id: cart_params[:content_id], user_id: current_user.id , sender_id: cart_params[:sender_id])
+        cart_item = CartItem.new(quantity: 1, recordable_type: 'Content', recordable_id: cart_params[:content_id], user_id: current_user.&id || 1 , sender_id: cart_params[:sender_id])
         if cart_item.save!
           render_success_response(cart_item, "Added to cart", 200)
         else

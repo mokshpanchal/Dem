@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_29_074439) do
-
+ActiveRecord::Schema[7.2].define(version: 2022_03_29_074439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -49,8 +48,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.bigint "recordable_id", null: false
     t.bigint "user_id", null: false
     t.integer "sender_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recordable_type", "recordable_id"], name: "index_cart_items_on_recordable"
     t.index ["user_id"], name: "index_cart_items_on_user_id"
   end
@@ -61,8 +60,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.integer "status"
     t.bigint "user_id", null: false
     t.bigint "content_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_comments_on_content_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -72,12 +71,12 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "visibility"
     t.integer "recieved_from"
     t.integer "copies"
-    t.datetime "published_at"
+    t.datetime "published_at", precision: nil
     t.string "purchase_state"
     t.bigint "user_id", null: false
     t.bigint "content_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_threads_on_content_id"
     t.index ["user_id"], name: "index_content_threads_on_user_id"
   end
@@ -93,8 +92,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "slug"
     t.string "length"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_contents_on_user_id"
   end
 
@@ -104,15 +103,15 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.integer "exp_month"
     t.integer "exp_year"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "interests", force: :cascade do |t|
     t.string "title"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "interests_users", id: false, force: :cascade do |t|
@@ -122,7 +121,7 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
 
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
-    t.datetime "exp", null: false
+    t.datetime "exp", precision: nil, null: false
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
@@ -135,8 +134,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.bigint "notifiable_id", null: false
     t.integer "is_read"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
     t.index ["redirectable_type", "redirectable_id"], name: "index_notifications_on_redirectable"
     t.index ["user_id"], name: "index_notifications_on_user_id"
@@ -147,8 +146,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "reason"
     t.bigint "user_id", null: false
     t.bigint "content_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_report_contents_on_content_id"
     t.index ["user_id"], name: "index_report_contents_on_user_id"
   end
@@ -162,15 +161,15 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "description"
     t.integer "allow_to_buy"
     t.integer "allow_to_publish"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subscription_plans_users", id: false, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "subscription_plan_id", null: false
     t.integer "status"
-    t.datetime "expires_on"
+    t.datetime "expires_on", precision: nil
     t.float "space_allowed"
     t.float "remaining_space"
     t.integer "renewable"
@@ -186,8 +185,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.float "recipient_closing"
     t.string "recordable_type", null: false
     t.bigint "recordable_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["recordable_type", "recordable_id"], name: "index_transactions_on_recordable"
   end
 
@@ -197,8 +196,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.boolean "email_promotion"
     t.boolean "publishable"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
@@ -206,8 +205,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.string "phone", null: false
     t.string "provider"
     t.string "uid"
@@ -216,8 +215,8 @@ ActiveRecord::Schema.define(version: 2022_03_29_074439) do
     t.date "birth_date", null: false
     t.string "username", null: false
     t.string "country_code"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -3,7 +3,7 @@ module Api
     class UserSettingsController < ApplicationController
       before_action :authenticate_user!
       def index
-        settings = UserSetting.where(user_id: current_user.id).first
+        settings = UserSetting.where(user_id: current_user.&id || 1).first
         render_success_response(setting, "User settings", 200)
       end
 
